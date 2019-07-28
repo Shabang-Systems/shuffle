@@ -1,0 +1,347 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+body {
+    background-color: #f7f7f7;
+}
+
+
+sidenav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* background-color:#e68f2c; */
+    overflow-x: hidden;
+    box-shadow: 5px 2px 2px -5px #804808;
+    background-color: #ffffff;
+    transform: translateY(70px);
+    width: 25vw;
+}
+
+topnav {
+    z-index: 2;
+    background-color: rgb(255, 123, 0);
+    /* margin-left: 25vw; */
+    position: fixed;
+    box-shadow: 0 2px 2px -2px gray;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+#topnav-img {
+    height: auto;
+    padding-left: 10px;
+}
+
+#search {
+    flex-grow: 2;
+    text-align: center;
+}
+
+#search-box {
+    width: 75%;
+}
+
+#account {
+    max-width: 15vw;
+    flex-grow: 1;
+}
+
+
+/* Large desktop */
+@media (min-width: 1200px) { 
+    topnav {
+        width: 100%;
+        height: 65px;
+    }
+    
+    sidenav {
+        height: 100%;
+        padding-top: 15px;
+    }
+
+    .nav-section {
+        color: rgb(255, 157, 0);
+        font-size: 15px;
+        padding-left: 10px;
+    }
+    
+    .sidenav-item {
+        /* background-color: #e68f2c; */
+        transition: background-color 0.5s;
+        height: 35px;
+        vertical-align: middle;
+        position: relative;
+        margin-bottom: 2px;
+    }
+    
+    .sidenav-item.active {
+        background-color: rgb(255, 157, 0);
+    }
+    
+    
+    .sidenav-item:hover {
+        background-color: rgb(255, 157, 0);
+    }
+    
+    
+    .sidenav-link {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 15px;
+        width: 100%;
+        height: 100%;
+        color: #3a3a3a;
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+        transition: color 0.5s;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .sidenav-link.active {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+    
+    .sidenav-link:hover {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    #topnav-img {
+        width: 11em;
+    }
+    
+    #header-top {
+        display: inline-block;
+        color: rgb(224, 147, 22);
+        padding-left: 10px;
+    }
+    
+    #story-wrapper {
+        margin-left: 160px; /* Same as the width of the sidebar */
+        padding: 0px 10px;
+    }
+
+    .navbar {
+        display: none;
+    }
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 769px) and (max-width: 1199px) { 
+    topnav {
+        width: 100%;
+        height: 65px;
+    }
+    
+    sidenav {
+        height: 100%;
+        padding-top: 10px;
+    }
+
+    .nav-section {
+        color: rgb(255, 157, 0);
+        font-size: 15px;
+        padding-left: 10px;
+    }
+    
+    .sidenav-item {
+        /* background-color: #e68f2c; */
+        transition: background-color 0.5s;
+        height: 33px;
+        vertical-align: middle;
+        position: relative;
+        margin-bottom: 1px;
+    }
+    
+    .sidenav-item.active {
+        background-color: rgb(255, 157, 0);
+    }
+    
+    
+    .sidenav-item:hover {
+        background-color: rgb(255, 157, 0);
+    }
+    
+    
+    .sidenav-link {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 14px;
+        width: 100%;
+        height: 100%;
+        color: #3a3a3a;
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+        transition: color 0.5s;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .sidenav-link.active {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+    
+    .sidenav-link:hover {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    #topnav-img {
+        width: 10em;
+    }
+    
+    #header-top {
+        display: inline-block;
+        color: rgb(224, 147, 22);
+        padding-left: 10px;
+    }
+    
+    #story-wrapper {
+        margin-left: 160px; /* Same as the width of the sidebar */
+        padding: 0px 10px;
+    }
+
+    .navbar {
+        display: none;
+    }
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 768px) { 
+    topnav {
+        width: 100%;
+        height: 7vw;
+    }
+    
+    sidenav {
+        height: 100%;
+        transform: translateY(7.25vw);
+    }
+
+    .nav-section {
+        color: rgb(255, 157, 0);
+        font-size: 12px;
+        padding-left: 10px;
+    }
+    
+    .sidenav-item {
+        /* background-color: #e68f2c; */
+        transition: background-color 0.5s;
+        height: 5vw;
+        vertical-align: middle;
+        position: relative;
+        margin-bottom: 1px;
+    }
+    
+    .sidenav-item.active {
+        background-color: rgb(255, 157, 0);
+    }
+    
+    
+    .sidenav-item:hover {
+        background-color: rgb(255, 157, 0);
+    }
+    
+    
+    .sidenav-link {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 2vw;
+        width: 100%;
+        height: 100%;
+        color: #3a3a3a;
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+        transition: color 0.5s;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .sidenav-link.active {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+    
+    .sidenav-link:hover {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+
+    #topnav-img {
+        width: 20vw;
+    }
+    
+    #header-top {
+        display: inline-block;
+        color: rgb(224, 147, 22);
+        padding-left: 10px;
+    }
+    
+    #story-wrapper {
+        margin-left: 160px; /* Same as the width of the sidebar */
+        padding: 0px 10px;
+    }
+
+    .navbar {
+        display: none;
+    }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+    sidenav {
+        display:none;
+    }
+
+    topnav {
+        display:none;
+    }
+    
+    #story-wrapper {
+        margin-left: 160px; /* Same as the width of the sidebar */
+        padding: 0px 10px;
+    }
+
+    .navbar {
+        display: block;
+    }
+}

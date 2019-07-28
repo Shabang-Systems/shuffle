@@ -6,7 +6,126 @@ unique kind of ideology that future generations will look up to.
 We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law -->
 
+{% load static %}
+
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>#!/Shuffle</title>
+        <link href="{% static "home/css/bootstrap/bootstrap.css" %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+        <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
+        <link href="{% static "home/css/index.css" %}" rel="stylesheet">
+        <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head> 
+    <body>
+        <div id="content-wrapper">
+            <div id="nav-wrapper" style="height:100%; width:100%;">
+                <topnav>
+                    <a href="#" style="padding-right: 3vw">
+                        <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
+                    </a>
+                    <form id="search" action="/search/" method="post" style="display: inline-block">
+                        <input id="search-box" type="text" name="name_field" value="Default name for team.">
+                    </form>
+                    <div id="account">
+                        account-info
+                    </div>
+                </topnav>
+                <sidenav>
+                    <div class="sidenav-item active">
+                        <a class="sidenav-link active" href="#">Home</a>
+                    </div>
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="#">Discover</a>
+                    </div>
+                    <hr \>
+                    <h3 class="nav-section">Folders</h3>
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="#">Chickpeas</a>
+                    </div>
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="#">Honeybees</a>
+                    </div>
+                    <hr \>
+                    <h3 class="nav-section">Classes</h3>
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="#">Groupsasd;lfijasd;lfkjasd of threes</a>
+                    </div>
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="#">Union Jacks</a>
+                    </div>
+                </sidenav>
+                
+                <nav class="navbar navbar-expand-sm navbar-light">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Software</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            
+            <div id="story-wrapper">
 
+            </div>
+        </div>
+        <script src="{% static "home/js/jquery_3.4.1_min.js" %}"></script>
+        <script src="{% static "home/js/bootstrap/bootstrap.min.js" %}"></script>
+    </body>
 </html>
