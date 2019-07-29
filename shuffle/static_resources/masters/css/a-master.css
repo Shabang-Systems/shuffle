@@ -36,6 +36,35 @@ topnav {
     width: 100%;
 }
 
+#account {
+    max-width: 15vw;
+    flex-grow: 1;
+    border-radius: 5px;
+    background-color: rgb(255, 157, 0);
+    margin-right: 20px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#account-info {
+    padding-left: 7px;
+    flex-grow: 3;
+    color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 10px;
+}
+
+#account-profile {
+    min-width: 30px;
+    max-height: 20px;
+    padding-left: 10px;
+    flex-grow: 1;
+}
+
 #topnav-img {
     height: auto;
     padding-left: 10px;
@@ -44,16 +73,57 @@ topnav {
 #search {
     flex-grow: 2;
     text-align: center;
+    color: #ffffff;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #ff9543;
+    font-weight: 500;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #ff9543;
+   opacity:  1;
+   font-weight: 500;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #ff9543;
+   opacity:  1;
+   font-weight: 500;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #ff9543;
+   font-weight: 500;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #ff9543;
+   font-weight: 500;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:   #ff9c51;
+   font-weight: 500;
 }
 
 #search-box {
     width: 75%;
+    transform: translateX(3vw);
+    border-radius: 2px;
+    border-style:solid;
+    border-color:#db710d;
+    border-width: 0.25px;
+    outline: none;
+    background-color: #e6640e;
+    color: #f0f0f0;
+    transition: background-color 0.5s;
+    font-weight: 600;
+    padding-left: 10px;
 }
 
-#account {
-    max-width: 15vw;
-    flex-grow: 1;
+#search-box:hover {
+    background-color: rgba(221, 107, 0, 0.466);
 }
+
+
 
 
 /* Large desktop */
@@ -126,8 +196,21 @@ topnav {
         color: rgb(255, 255, 255);
     }
 
+    #account {
+        height: 35px;
+    }
+    
+    #account-info {
+        font-size: 15px;
+    }
+
+    #search-box{
+        height:45px;
+        font-size: 17px;
+    }
+
     #topnav-img {
-        width: 11em;
+        width: 10em;
     }
     
     #header-top {
@@ -214,6 +297,20 @@ topnav {
     .sidenav-link:hover {
         text-decoration: none;
         color: rgb(255, 255, 255);
+    }
+
+    #search-box{
+        height:45px;
+        font-size: 17px;
+    }
+    
+
+    #account {
+        height: 35px;
+    }
+    
+    #account-info {
+        font-size: 14px;
     }
 
     #topnav-img {
@@ -306,8 +403,16 @@ topnav {
         color: rgb(255, 255, 255);
     }
 
+    #account {
+        height: 4vw;
+    }
+    
+    #account-info {
+        font-size: 10px;
+    }
+
     #topnav-img {
-        width: 20vw;
+        width: 19vw;
     }
     
     #header-top {
@@ -319,6 +424,11 @@ topnav {
     #story-wrapper {
         margin-left: 160px; /* Same as the width of the sidebar */
         padding: 0px 10px;
+    }
+
+    #search-box{
+        height:5vw;
+        font-size: 2.25vw;
     }
 
     .navbar {
