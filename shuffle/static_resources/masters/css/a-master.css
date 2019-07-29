@@ -123,7 +123,47 @@ topnav {
     background-color: rgba(221, 107, 0, 0.466);
 }
 
+#account-dropdown-container {
+    display: flex;
+    flex-direction: column;
+}
 
+#account-dropdown {
+    position: absolute;
+    z-index: 2;
+    display: inline-block;
+    background-color: #ffffff;
+    padding-left: 10px;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px -2px gray;
+}
+
+.acct-dropdown-item {
+    margin-right: 10px;
+    padding-bottom: 10px;
+}
+
+.acct-dropdown-large {
+    color: #000000;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.25s;
+}
+
+.acct-dropdown-small {
+    color: #e6640e;
+    font-weight: 700;
+    font-size: 13px;
+    transition: color 0.25s;
+}
+
+.acct-dropdown-large:hover {
+    color: #8d8d8d;
+}
+
+.acct-dropdown-small:hover {
+    color: #f88b42;
+}
 
 
 /* Large desktop */
@@ -137,6 +177,7 @@ topnav {
         height: 100%;
         padding-top: 15px;
     }
+
 
     .nav-section {
         color: rgb(255, 157, 0);
@@ -194,6 +235,11 @@ topnav {
     .sidenav-link:hover {
         text-decoration: none;
         color: rgb(255, 255, 255);
+    }
+
+    #account-dropdown {
+        width: 300px;
+        transform: translateX(-200px) translateY(35px);
     }
 
     #account {
@@ -299,6 +345,11 @@ topnav {
         color: rgb(255, 255, 255);
     }
 
+    #account-dropdown {
+        width: 300px;
+        transform: translateX(-200px) translateY(35px);
+    }
+
     #search-box{
         height:45px;
         font-size: 17px;
@@ -401,6 +452,11 @@ topnav {
     .sidenav-link:hover {
         text-decoration: none;
         color: rgb(255, 255, 255);
+    }
+
+    #account-dropdown {
+        width: 250px;
+        transform: translateX(-155px) translateY(3.5vw) scale(0.95);
     }
 
     #account {
