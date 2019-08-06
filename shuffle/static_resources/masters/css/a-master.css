@@ -6,6 +6,10 @@ unique kind of ideology that future generations will look up to.
 We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law */
 
+html {
+    min-width: 320px;
+}
+
 body {
     background-color: #f7f7f7;
 }
@@ -65,12 +69,13 @@ topnav {
     flex-grow: 1;
 }
 
+
 #topnav-img {
     height: auto;
     padding-left: 10px;
 }
 
-#search {
+.search {
     flex-grow: 2;
     text-align: center;
     color: #ffffff;
@@ -104,7 +109,7 @@ topnav {
    font-weight: 500;
 }
 
-#search-box {
+.search-box {
     width: 75%;
     transform: translateX(3vw);
     border-radius: 2px;
@@ -119,13 +124,14 @@ topnav {
     padding-left: 10px;
 }
 
-#search-box:hover {
+.search-box:hover {
     background-color: rgba(221, 107, 0, 0.466);
 }
 
 #account-dropdown-container {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 #account-dropdown {
@@ -163,6 +169,10 @@ topnav {
 
 .acct-dropdown-small:hover {
     color: #f88b42;
+}
+
+.a {
+    color: rgb(255, 217, 182);
 }
 
 
@@ -250,7 +260,7 @@ topnav {
         font-size: 15px;
     }
 
-    #search-box{
+    .search-box{
         height:45px;
         font-size: 17px;
     }
@@ -350,7 +360,7 @@ topnav {
         transform: translateX(-200px) translateY(35px);
     }
 
-    #search-box{
+    .search-box{
         height:45px;
         font-size: 17px;
     }
@@ -482,7 +492,7 @@ topnav {
         padding: 0px 10px;
     }
 
-    #search-box{
+    .search-box{
         height:5vw;
         font-size: 2.25vw;
     }
@@ -510,4 +520,29 @@ topnav {
     .navbar {
         display: block;
     }
+
+    .mobile-search {
+        padding-bottom: 10px;
+    }
+
+    
+    .mobile-search-box {
+        width: 90vw;
+        height: 35px;
+        border-radius: 2px;
+        border-style:solid;
+        border-color:#db710d;
+        border-width: 0.25px;
+        outline: none;
+        background-color: #e6640e;
+        color: #f0f0f0;
+        transition: background-color 0.5s;
+        font-weight: 600;
+        padding-left: 10px;
+    }
+
+    .mobile-search-box:hover {
+        background-color: rgba(221, 107, 0, 0.466);
+    }
+
 }
