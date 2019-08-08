@@ -24,7 +24,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
         <div id="content-wrapper">
             <div id="nav-wrapper" style="height:100%; width:100%;">
                 <topnav>
-                    <a href="#" style="padding-right: 3vw">
+                    <a href="/" style="padding-right: 3vw">
                         <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
                     </a>
                     <form class="search" action="/search/" method="post" style="display: inline-block">
@@ -36,12 +36,31 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <div id="account">
                             <img id="account-profile" src="{% static "masters/img/shuffle-profile.png" %}" alt="shuffle profile">
                             <div id="account-info">
-                                Jemoka
+                                {% if firstname %}
+                                {{firstname}}
+                                {% else %}
+                                @{{username}}
+                                {% endif %}
                             </div>
                         </div>
                         <div id="account-dropdown" style="display:none">
                             <div class="acct-dropdown-item">
-                                <div style="display:inline-block; font-weight: 700; font-size: 20px; ">@Jemoka</div> <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Grand Master</t>
+                                <div style="display:inline-block; font-weight: 700; font-size: 20px; ">@{{username}}</div>
+                                {% if points <= 1000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
+                                {% elif points <= 5000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
+                                {% elif points <= 10000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Master</t>
+                                {% elif points <= 50000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
+                                {% elif points <= 10000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; G_d</t>
+                                {% endif %}
                             </div>
                             <hr style="padding:0; margin:0; transform: translateY(-5px);"/>
                             <div class="acct-dropdown-item">
@@ -51,7 +70,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                                 <a href="#" class="acct-dropdown-large" style="text-decoration: none;">Developers</a>
                             </div>
                             <div class="acct-dropdown-item"  style="float: right;">
-                                <a href="#" class="acct-dropdown-small" style="text-decoration: none;">Logout</a>
+                                <a href="logout" class="acct-dropdown-small" style="text-decoration: none;">Logout</a>
                             </div>
                             <div class="acct-dropdown-item" style="float: right;">
                                 <a href="#" class="acct-dropdown-small" style="text-decoration: none;">About</a>
@@ -69,19 +88,14 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     </div>
                     <hr \>
                     <h3 class="nav-section">Folders</h3>
+                    {% for folder in folders %}
                     <div class="sidenav-item">
-                        <a class="sidenav-link" href="#">Chickpeas</a>
+                        <a class="sidenav-link" href="folders/{{ folder.0 }}">{{ folder.1 }}</a>
                     </div>
+                    <hr style="margin:0; padding:0; width: 80%"\>
+                    {% endfor %}
                     <div class="sidenav-item">
-                        <a class="sidenav-link" href="#">Honeybees</a>
-                    </div>
-                    <hr \>
-                    <h3 class="nav-section">Classes</h3>
-                    <div class="sidenav-item">
-                        <a class="sidenav-link" href="#">Groupsasd;lfijasd;lfkjasd of threes</a>
-                    </div>
-                    <div class="sidenav-item">
-                        <a class="sidenav-link" href="#">Union Jacks</a>
+                        <a class="sidenav-link" style="color: rgb(200, 200, 200) "href="#">+New</a>
                     </div>
                 </sidenav>
                 
@@ -107,29 +121,39 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                             </li>
                             <hr style="padding:0; margin:0;"/>
                             <t style="transform: translateY(8px); font-size: 12px;color: rgb(255, 217, 182);">Folders</t>
+                            {% for folder in folders %}
                             <li class="nav-item">
-                                <a class="nav-link" style="color: white" href="#">Folder</a>
+                                <a class="nav-link" style="color: white" href="folders/{{ folder.0 }}">{{ folder.1 }}</a>
                             </li>
+                            {% endfor %}
                             <li class="nav-item">
-                                <a class="nav-link" style="color: white" href="#">Folder</a>
+                                <a class="nav-link" style="color: white" href="#">+New</a>
                             </li>
                             <a href="#" style="text-decoration: none; transform: translateX(75vw); font-size: 12px;color: rgb(255, 217, 182); padding-bottom: 5px">More...</a>
                             <hr style="padding:0; margin:0;"/>
-                            <t style="transform: translateY(8px); font-size: 12px;color: rgb(255, 217, 182);">Classes</t>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: white" href="#">Class</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: white" href="#">Class</a>
-                            </li>
-                            <a href="#" style="text-decoration: none; transform: translateX(75vw); font-size: 12px;color: rgb(255, 217, 182); padding-bottom: 10px">More...</a>
-                            <hr style="padding:0; margin:0;"/>
                             <div class="acct-dropdown-item">
-                                <div style="display:inline-block; font-weight: 700; font-size: 20px; color:white;">@Jemoka</div> <t style="display:inline-block; font-weight: 200; font-size: 20px; color:white;">&#8226; Grand Master</t>
+                                <div style="display:inline-block; font-weight: 700; font-size: 20px; color:white;">@{{username}}</div>
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px; color:white;">
+                                {% if points <= 1000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
+                                {% elif points <= 5000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
+                                {% elif points <= 10000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Master</t>
+                                {% elif points <= 50000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
+                                {% elif points <= 10000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; G_d</t>
+                                {% endif %}
+                                </t>
                             </div>
                             <div class="acct-dropdown-item"  style="float: right; display:inline-block">
                             <a href="#" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; padding-right: 10px; color: white;">About</a>
-                                <a href="#" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; color: white;">Logout</a>
+                                <a href="logout" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; color: white;">Logout</a>
                             </div>
                         </ul>
                     </div>

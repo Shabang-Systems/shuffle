@@ -30,11 +30,14 @@ from django.urls import path
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+import account
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dbapi/', include('dbapi.urls')),
     path('account/', include('account.urls')),
     path('', include('home.urls')),
+    path('login/', account.views.signin),
+    path('logout/', account.views.signout)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

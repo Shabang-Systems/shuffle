@@ -15,7 +15,13 @@ from rest_framework import viewsets
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login')
 def index(request):
     template = loader.get_template('home/index.html')
-    return HttpResponse(template.render({}, request))
+    folders = request.user.folders.all()
+    folderContext = []
+    for folder in folders:
+        folderContext.append([folder.id, folder.name])
+    return HttpResponse(template.render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext}, request))

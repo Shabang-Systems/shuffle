@@ -16,5 +16,7 @@ from . import views
 urlpatterns = [
     path('', views.createaccount, name="account"),
     path('new', views.createaccount, name="createaccount"),
-    path('go', views.createaccount_do, name="createaccount_go")
+    path('go', views.createaccount_do, name="createaccount_do"),
+    path('login', views.signin, name="login"),
+    path('auth', views.signin_do, name="login_do")
 ]

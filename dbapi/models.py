@@ -13,10 +13,19 @@ unless explicitly stated otherwise or where it is prohibited by law
 from django.db import models
 from account.models import User
 
+class Folder(models.Model):
+    name = models.CharField(max_length=50, default="", help_text='Name')
+    description = models.CharField(max_length=50, null=True, blank=True, help_text='Description')
+    owner = models.ForeignKey(User, null=True, blank=True, on_delete="SET_NULL", related_name='folders')
+
+    def __str__(self):
+        return self.name+" ("+str(self.id)+")"
+
 class Database(models.Model):
     name = models.CharField(max_length=50, default="", help_text='Name')
     description = models.CharField(max_length=50, null=True, blank=True, help_text='Description')
     owner = models.ForeignKey(User, null=True, blank=True, on_delete="SET_NULL", related_name='databases')
+    folder = models.ForeignKey(Folder, null=True, blank=True, on_delete="SET_NULL", related_name='databases')
 
     def __str__(self):
         return self.name+" ("+str(self.id)+")"

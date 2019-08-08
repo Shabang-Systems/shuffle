@@ -43,7 +43,13 @@ unless explicitly stated otherwise or where it is prohibited by law -->
         Enough talking: let's get started. <br />
         
         <form action="/account/go" method="post" style="display: inline-block; padding-top: 10px;">{% csrf_token %}
+            {% if regstatus == 'failed-nameexist'%}
+            <input class="form-box" style="display:inline-block; border:1px solid #ff0000" type="text" name="username" autocomplete="off" placeholder="Username">
+            <b style="display: inline-block; color: red">Sorry! An account using the username {{uname}} already exists.</b>
+            <br />
+            {% else %}
             <input class="form-box" style="display:inline-block;" type="text" name="username" autocomplete="off" placeholder="Username" style=""> <br />
+            {% endif %}
             <input class="form-box" style="display:inline-block;" type="text" name="firstname" autocomplete="off" placeholder="First Name" style="">
             <input class="form-box" style="display:inline-block;" type="text" name="lastname" autocomplete="off" placeholder="Last Name" style="">
             <input class="form-box" style="display:inline-block;" type="email" name="email" autocomplete="off" placeholder="Email" style="">

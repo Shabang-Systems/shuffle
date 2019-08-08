@@ -1,0 +1,73 @@
+<!-- Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>#!/Shuffle</title>
+        <link href="{% static "masters/css/bootstrap/bootstrap.css" %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+        <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
+        <link href="{% static "account/css/login.css" %}" rel="stylesheet">
+        <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head> 
+    <body>
+        <div id="content-wrapper">
+            <div id="nav-wrapper" style="height:100%; width:100%;">
+                <topnav>
+                    <a href="/" style="padding-right: 3vw">
+                        <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
+                    </a>
+                </topnav>
+                
+                <nav class="navbar navbar-expand-sm navbar-light" style="background-color: rgb(255, 123, 0);">
+                    
+                    <a href="#" class="navbar-brand"><img class="navbar-brand" style="width: 130px; padding-left: 10px;"; src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding"></a>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <hr style="padding:0; margin:0; border: none; border-bottom: 0.1px solid orange;"/>
+                    </div>
+                </nav>
+            </div>
+            
+            <div id="story-wrapper">
+                <div id="center-box">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <h1 id="login-header">
+                            Login.
+                        </h1>
+                        <hr style="border-top: 0.5px solid rgb(100, 30, 0); width: 90%; margin: 0px; margin: 5px 0 0 0;" />
+                    </div>
+                    <form action="/account/auth" method="post" id="auth-form">{% csrf_token %}
+                        {% if authstatus == 'new' %}
+                        <input class="form-box" type="text" name="username" autocomplete="off" placeholder="Username" style=""> <br />
+                        <input class="form-box" type="password" name="password" autocomplete="off" placeholder="Password" style="">
+                        {% else %}
+                        <input class="form-box" type="text" name="username" autocomplete="off" placeholder="Username" style="border:1px solid #ff0000"> <br />
+                        <input class="form-box" type="password" name="password" autocomplete="off" placeholder="Password" style="border:1px solid #ff0000">
+                        <t style="color: red; font-size: 15px">Invalid Logon Details</t>
+                        {% endif %}
+                        <br />
+                        <input id="form-submit" type="submit" value="Submit"/>
+                    </form> 
+                </div>
+            </div>
+        </div>
+        <script src="{% static "masters/js/jquery_3.4.1_min.js" %}"></script>
+        <script src="{% static "masters/js/bootstrap/bootstrap.min.js" %}"></script>
+        <script>
+            $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
+            $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
+            $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
+            $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
+        </script>
+    </body>
+</html>

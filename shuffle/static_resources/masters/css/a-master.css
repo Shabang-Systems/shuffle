@@ -8,10 +8,12 @@ unless explicitly stated otherwise or where it is prohibited by law */
 
 html {
     min-width: 320px;
+    height: 100%;
 }
 
 body {
     background-color: #f7f7f7;
+    height: 100%;
 }
 
 
