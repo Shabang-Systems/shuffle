@@ -1,0 +1,192 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+body {
+    padding-right: 20px;
+    color: rgb(66, 30, 0);
+    padding-left: 30px;
+    font-weight: 500;
+    width: 100%;
+}
+
+#head-brand {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    padding-top: 25px;
+
+}
+
+
+#head-brand-tagline {
+    height: 10vw;
+    width: auto;
+    position: relative;
+    padding-right: 2vw;
+    transform: translateY(0.7vw);
+
+}
+
+
+#head-brand-image {
+    height: 8.5vw;
+    width: auto;
+    position: relative;
+
+}
+
+#head-blurb {
+    color: rgb(223, 121, 73);
+    font-weight: 600;
+    font-size: 2.75vw;
+
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #666666c0;
+    font-weight: 500;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #666666c0;
+   opacity:  1;
+   font-weight: 500;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #666666c0;
+   opacity:  1;
+   font-weight: 500;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #666666c0;
+   font-weight: 500;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:   #666666c0;
+   font-weight: 500;
+}
+
+.form-box {
+    border-radius: 5px;
+    border-style:solid;
+    border-color:rgb(66, 30, 0);
+    border-width: 1px;
+    outline: none;
+    background-color: white;
+    color: rgb(66, 30, 0);
+    transition: background-color 0.5s;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-right: 10px;
+
+}
+/* 
+.form-box:hover {
+    background-color: rgb(235, 235, 235);
+} */
+
+
+.form-box:focus {
+    background-color: rgb(235, 235, 235);
+}
+
+#form-submit {
+    border:none; 
+    border-radius: 4px; 
+    background-image: none;
+    background-color:#e0751c;
+    color: white;
+    font-weight: 700;
+    transition: background-color 0.5s;
+}
+
+#form-submit:hover {
+    background-color: rgb(194, 104, 2);
+}
+
+input:invalid:focus {
+    box-shadow:0 0 3px red;
+}
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    
+    body {
+        font-size: 20px;
+    }
+
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 50px;
+        width: 40vw;
+    }
+
+    #form-submit {
+        font-size: 25px;
+    }
+
+
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+
+    body {
+        font-size: 18px;
+    }
+
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 37px;
+        width: 40vw;
+    }
+
+    #form-submit {
+        font-size: 25px;
+    }
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+    body {
+        font-size: 17px;
+    }
+
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 35px;
+        width: 40vw;
+    }
+
+    #form-submit {
+        font-size: 23px;
+        
+    }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+    body {
+        font-size: 2.75vw;
+    }
+
+    .form-box {
+        padding-left: 12px;
+        font-size: 12px;
+        height: 25px;
+        width: 70vw;
+    }
+
+    #form-submit {
+        font-size: 4vw;
+    }
+}

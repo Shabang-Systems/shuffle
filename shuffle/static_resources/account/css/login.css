@@ -1,0 +1,219 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+html, body {
+    height: 100%;
+}
+
+#center-box {
+    background-color: white ;
+    transform: translateX(-8vw) translateY(3vw);
+    border-radius: 10px;
+}
+
+#login-header {
+    color: #e0851c;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    padding-top: 15px;
+}
+
+#auth-form {
+    display:flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 20px
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #666666c0;
+    font-weight: 500;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #666666c0;
+   opacity:  1;
+   font-weight: 500;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #666666c0;
+   opacity:  1;
+   font-weight: 500;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #666666c0;
+   font-weight: 500;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:   #666666c0;
+   font-weight: 500;
+}
+
+.form-box {
+    border-radius: 5px;
+    border-style:solid;
+    border-color:rgb(66, 30, 0);
+    border-width: 1px;
+    outline: none;
+    background-color: white;
+    color: rgb(66, 30, 0);
+    transition: background-color 0.5s;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+.form-box:focus {
+    background-color: rgb(235, 235, 235);
+}
+
+#form-submit {
+    border:none; 
+    border-radius: 4px; 
+    background-image: none;
+    background-color:#e0751c;
+    color: white;
+    font-weight: 700;
+    transition: background-color 0.5s;
+}
+
+/* .form-box {
+    height: 30px;
+} */
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 50px;
+        width: 20vw;
+    }
+
+    #form-submit {
+        font-size: 25px;
+    }
+
+    #login-header {
+        font-size: 50px;
+    }
+
+    #center-box {
+        height: 400px;
+        width: 30vw;
+        box-shadow: -2px -2px #92929244;
+    }
+
+    #story-wrapper {
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+    .form-box {
+        margin-top: 5px;
+        padding-left: 15px;
+        font-size: 15px;
+        height: 40px;
+        width: 28vw;
+    }
+
+    #form-submit {
+        font-size: 25px;
+    }
+
+    #login-header {
+        font-size: 45px;
+    }
+
+    #center-box {
+        height: 375px;
+        width: 40vw;
+        box-shadow: -2px -2px #92929244;
+    }
+
+    #story-wrapper {
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 30px;
+        width: 35vw;
+    }
+
+    #form-submit {
+        font-size: 20px;
+    }
+
+    #login-header {
+        font-size: 30px;
+    }
+
+    #center-box {
+        height: 375px;
+        width: 50vw;
+        box-shadow: -2px -2px #92929244;
+    }
+
+    #story-wrapper {
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 30px;
+        width: 200px;
+        transform: translateX(-25px)
+    }
+
+    #form-submit {
+        font-size: 20px;
+    }
+
+    #login-header {
+        font-size: 30px;
+    }
+
+    #center-box {
+        height: 30vh;
+        width: 80vw;
+        background-color: transparent;
+        box-shadow: 0px 0px #92929244;
+        transform: translateX(-65px) translateY(-100px);
+    }
+
+    #story-wrapper {
+        height: 90vh;
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+}
+
