@@ -7,95 +7,87 @@ We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law */
 
 body {
-    background-color: rgb(255, 136, 0);
-    color: white;
+    padding-right: 20px;
+    color: rgb(66, 30, 0);
     padding-left: 30px;
-    font-size: 15.5px;
+    font-weight: 500;
+    width: 100%;
 }
 
 #head-brand {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     flex-direction: row;
-    padding-top: 30px;
+    padding-top: 25px;
 
 }
 
 
 #head-brand-tagline {
-    width: 16em;
-    height: auto;
+    height: 10vw;
+    width: auto;
     position: relative;
-    padding-right: 20px;
-}
+    padding-right: 2vw;
+    transform: translateY(0.7vw);
 
-#head-brand-period {
-    display: inline-block;
-    color: rgb(255, 255, 255);
-    font-weight: 300;
-    padding-right: 35px;
-    transform: translateY(-7px);
-    font-size: 100px;
-    position: relative;
 }
 
 
 #head-brand-image {
-    width: 23em;
-    height: auto;
+    height: 8.5vw;
+    width: auto;
     position: relative;
+
 }
 
 #head-blurb {
-    color: rgb(255, 255, 255);
+    color: rgb(223, 121, 73);
     font-weight: 600;
-    font-size: 25px;
+    font-size: 2.75vw;
 
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #e0e0e0c0;
+    color:    #666666c0;
     font-weight: 500;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #e0e0e0c0;
+   color:    #666666c0;
    opacity:  1;
    font-weight: 500;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #e0e0e0c0;
+   color:    #666666c0;
    opacity:  1;
    font-weight: 500;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #e0e0e0c0;
+   color:    #666666c0;
    font-weight: 500;
 }
 
 ::placeholder { /* Most modern browsers support this now. */
-   color:   #e0e0e0c0;
+   color:   #666666c0;
    font-weight: 500;
 }
 
 .form-box {
-    width: 500px;
     border-radius: 5px;
     border-style:solid;
-    border-color:#ffb775;
+    border-color:rgb(66, 30, 0);
     border-width: 1px;
     outline: none;
-    background-color: #e0751c;
-    color: #ffffff;
+    background-color: white;
+    color: rgb(66, 30, 0);
     transition: background-color 0.5s;
     font-weight: 600;
-    padding-left: 20px;
     margin-bottom: 20px;
-    height: 50px;
+    margin-right: 10px;
 
 }
 
 .form-box:hover {
-    background-color: rgb(255, 136, 0);
+    background-color: rgb(235, 235, 235);
 }
 
 #form-submit {
@@ -105,10 +97,87 @@ body {
     background-color:#e0751c;
     color: white;
     font-weight: 700;
-    font-size: 25px;
     transition: background-color 0.5s;
 }
 
 #form-submit:hover {
     background-color: rgb(194, 104, 2);
+}
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    
+    body {
+        font-size: 20px;
+    }
+
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 50px;
+        width: 40vw;
+    }
+
+    #form-submit {
+        font-size: 25px;
+    }
+
+
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+
+    body {
+        font-size: 18px;
+    }
+
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 37px;
+        width: 40vw;
+    }
+
+    #form-submit {
+        font-size: 25px;
+    }
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+    body {
+        font-size: 17px;
+    }
+
+    .form-box {
+        padding-left: 15px;
+        font-size: 15px;
+        height: 35px;
+        width: 40vw;
+    }
+
+    #form-submit {
+        font-size: 23px;
+        
+    }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+    body {
+        font-size: 2.75vw;
+    }
+
+    .form-box {
+        padding-left: 12px;
+        font-size: 12px;
+        height: 25px;
+        width: 70vw;
+    }
+
+    #form-submit {
+        font-size: 4vw;
+    }
 }

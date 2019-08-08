@@ -28,5 +28,8 @@ def createaccount_do(request):
         user = get_user_model().objects.create_user(username=requestItem['username'], email=requestItem['email'], password=requestItem['password'], first_name=requestItem['firstname'], last_name=requestItem['lastname'])
         user.user_verified = False
         user.save()
-    return HttpResponse("")
+        template = loader.get_template('account/createaccount_success.html')
+    else:
+        template = loader.get_template('account/createaccount_failed.html')
+    return HttpResponse(template.render({}, request))
 
