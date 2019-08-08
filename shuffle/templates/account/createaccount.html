@@ -1,0 +1,54 @@
+<!-- Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>#!/Shuffle</title>
+        <link href="{% static "masters/css/bootstrap/bootstrap.css" %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+        <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
+        <link href="{% static "account/css/createaccount.css" %}" rel="stylesheet">
+        <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="head-brand">
+            <img id="head-brand-tagline" src="{% static "account/img/shuffle-acct-brand.png" %}" alt="shuffle head brand tagline">
+            <img id="head-brand-image" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
+            <h1 id="head-brand-period">.</h1>
+        </div>
+        <div id="head-blurb">
+            Become more productive, achieve more results, and save time in study. <br />
+            <t style="font-weight: 100">Welcome to</t> <t style="font-weight: 700; rgb(255, 228, 218);">#!/Shuffle</t><t style="font-weight: 100; font-size: 10px; padding-left: 1px; ">alpha</t>
+        </div>
+        <hr style="width: 97%; transform: translateX(-20px); margin-top: 30px; border-width: 0.5px; border-style: block; border-color: white" />
+        First things first: thank you for participating in the semi-public alpha trial of <t style="font-weight: 700; rgb(255, 228, 218);">#!/Shuffle</t>. All of us here in the Shuffle division appreciate your support of our software and its continued development. 
+        <br />
+        Please remember, however, that <b>alpha software, well, is unreleased</b>. As of right now, we cannot garantee that your databases will be retained in any form, or its security be garanteed. We will work hard to move past the alpha and into the next stages as soon as possible.
+        <br /> <br />
+        By signing up for this software, you also agree to our <a href="#" style="text-decoration: none; color: rgb(200, 200, 200);">Privacy Policy</a> and <a href="#" style="text-decoration: none; color: rgb(200, 200, 200);">Terms of Service</a>.
+        <br />
+        Due to a lovely thing called <a href="https://gdpr-info.eu/" style="text-decoration: none; color: rgb(200, 200, 200);">the GDPR</a>, this product is not intended for use in the European Union. EU users could check the <a href="#" style="text-decoration: none; color: rgb(200, 200, 200);">Terms of Service</a> for GDPR compliance updates.
+        <hr style="width: 97%; transform: translateX(-20px); margin-top: 30px; border-width: 0.5px; border-style: block; border-color: white" />
+        Enough talking: let's get started. <br />
+        <form action="/account/go" method="post" style="display: inline-block; padding-top: 10px;">{% csrf_token %}
+            <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
+            <input class="form-box" style="display:inline-block; " type="text" name="username" autocomplete="off" placeholder="Username" style=""> <br />
+            <input class="form-box" style="display:inline-block; " type="text" name="firstname" autocomplete="off" placeholder="First Name" style="">
+            <input class="form-box" style="display:inline-block; " type="text" name="lastname" autocomplete="off" placeholder="Last Name" style="">
+            <input class="form-box" style="display:inline-block; " type="email" name="email" autocomplete="off" placeholder="Email" style="">
+            <input class="form-box" style="display:inline-block;" type="password" name="password" autocomplete="off" placeholder="Password" style="">
+            <br />
+            <input id="form-submit" type="submit" value="Submit."/>
+        </form>
+    </body>
+</html>

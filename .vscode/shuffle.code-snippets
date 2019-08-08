@@ -17,7 +17,7 @@
 	// }
 
 	"The Blurb (HTML)": {
-		"scope": "html",
+		"scope": "html, django-html",
 		"prefix": "cpr_blurb",
 		"body": [
 			"<!-- Bada Bing, Bada Boom",

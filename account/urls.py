@@ -8,14 +8,13 @@ We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law */
 '''
 
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
-from rest_framework import viewsets
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.urls import path
+from django.urls import include, path
 
-def index(request):
-    template = loader.get_template('home/index.html')
-    return HttpResponse(template.render({}, request))
+from . import views
+
+urlpatterns = [
+    path('', views.createaccount, name="account"),
+    path('new', views.createaccount, name="createaccount"),
+    path('go', views.createaccount_do, name="createaccount_go")
+]

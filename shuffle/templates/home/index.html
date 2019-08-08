@@ -12,7 +12,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
 <html>
     <head>
         <title>#!/Shuffle</title>
-        <link href="{% static "home/css/bootstrap/bootstrap.css" %}" rel="stylesheet">
+        <link href="{% static "masters/css/bootstrap/bootstrap.css" %}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
         <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
@@ -34,7 +34,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     </form>
                     <div id="account-dropdown-container">
                         <div id="account">
-                            <img id="account-profile" src="{% static "masters/img/shuffle-profile.png" %}" alt="shuffle branding">
+                            <img id="account-profile" src="{% static "masters/img/shuffle-profile.png" %}" alt="shuffle profile">
                             <div id="account-info">
                                 Jemoka
                             </div>
@@ -140,8 +140,8 @@ unless explicitly stated otherwise or where it is prohibited by law -->
 
             </div>
         </div>
-        <script src="{% static "home/js/jquery_3.4.1_min.js" %}"></script>
-        <script src="{% static "home/js/bootstrap/bootstrap.min.js" %}"></script>
+        <script src="{% static "masters/js/jquery_3.4.1_min.js" %}"></script>
+        <script src="{% static "masters/js/bootstrap/bootstrap.min.js" %}"></script>
         <script>
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});

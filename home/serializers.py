@@ -5,9 +5,14 @@ are the forces, that traverse all platforms, all standards
 and all norms to form their unique class, unique style, and a
 unique kind of ideology that future generations will look up to.
 We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
-unless explicitly stated otherwise or where it is prohibited by law */
+unless explicitly stated otherwise or where it is prohibited by law
 '''
 
-from django.shortcuts import render
+from django.contrib.auth.models import User, Group
+from rest_framework import serializers
 
 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'firstname', 'lastname', 'email', 'password']
