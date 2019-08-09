@@ -16,22 +16,35 @@ body {
     height: 100%;
 }
 
+#content-wrapper {
+    height: 100%
+}
+
+.clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+ }
+
 
 sidenav {
-    display: block;
     position: fixed;
     top: 0;
     left: 0;
     /* background-color:#e68f2c; */
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     box-shadow: 5px 2px 2px -5px #804808;
     background-color: #ffffff;
     transform: translateY(70px);
     width: 25vw;
+    z-index: 0;
+    height: 100%;
 }
 
 topnav {
-    z-index: 2;
+    z-index: 1;
     background-color: rgb(255, 123, 0);
     /* margin-left: 25vw; */
     position: fixed;
@@ -39,6 +52,7 @@ topnav {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    top: 0px;
     width: 100%;
 }
 
@@ -177,9 +191,18 @@ topnav {
     color: rgb(255, 217, 182);
 }
 
-
 /* Large desktop */
 @media (min-width: 1200px) { 
+    #story-wrapper {
+        max-width: 76vw;
+        transform: translateX(12vw) translateY(65px);
+    }
+
+    #main-wrapper {
+        margin-left: 25vw;
+        margin-top: 85px;
+    }
+
     topnav {
         width: 100%;
         height: 65px;
@@ -289,6 +312,16 @@ topnav {
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 769px) and (max-width: 1199px) { 
+    #story-wrapper {
+        max-width: 75vw;
+        transform: translateX(12vw) translateY(65px);
+    }
+
+    #main-wrapper {
+        margin-left: 25vw;
+        margin-top: 85px;
+    }
+
     topnav {
         width: 100%;
         height: 65px;
@@ -398,6 +431,16 @@ topnav {
  
 /* Landscape phone to portrait tablet */
 @media (min-width: 480px) and (max-width: 768px) { 
+    #story-wrapper {
+        max-width: 76vw;
+        transform: 0;
+    }
+
+    #main-wrapper {
+        margin-left: 25vw;
+        margin-top:8vw;
+    }
+
     topnav {
         width: 100%;
         height: 7vw;
@@ -506,6 +549,16 @@ topnav {
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
+    #story-wrapper {
+        width: 95vw;
+        transform: translateX(-150px);
+    }
+
+    #main-wrapper {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    
     sidenav {
         display:none;
     }

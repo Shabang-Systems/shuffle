@@ -12,11 +12,12 @@ unless explicitly stated otherwise or where it is prohibited by law
 
 from django.db import models
 from account.models import User
+from datetime import datetime
 
 class Folder(models.Model):
     name = models.CharField(max_length=50, default="", help_text='Name')
     description = models.CharField(max_length=50, null=True, blank=True, help_text='Description')
-    owner = models.ForeignKey(User, null=True, blank=True, on_delete="SET_NULL", related_name='folders')
+    owner = models.ForeignKey(User, null=True, on_delete="CASCADE", related_name='folders')
 
     def __str__(self):
         return self.name+" ("+str(self.id)+")"
@@ -24,7 +25,7 @@ class Folder(models.Model):
 class Database(models.Model):
     name = models.CharField(max_length=50, default="", help_text='Name')
     description = models.CharField(max_length=50, null=True, blank=True, help_text='Description')
-    owner = models.ForeignKey(User, null=True, blank=True, on_delete="SET_NULL", related_name='databases')
+    owner = models.ForeignKey(User, null=True, on_delete="CASCADE", related_name='databases')
     folder = models.ForeignKey(Folder, null=True, blank=True, on_delete="SET_NULL", related_name='databases')
 
     def __str__(self):
@@ -34,7 +35,16 @@ class Word(models.Model):
     term = models.CharField(max_length=100, default="", help_text='Term')
     definition = models.CharField(max_length=100, default="", help_text='Definition')
     image_url = models.CharField(max_length=500, null=True, blank=True, help_text='Image URL')
-    database = models.ForeignKey(Database, null=True, blank=True, on_delete="CASCADE", related_name='words')
+    database = models.ForeignKey(Database, null=True, on_delete="CASCADE", related_name='words')
 
     def __str__(self):
         return self.term
+
+class LevelDesc(models.Model):
+    db = models.ForeignKey(Database, null=True, on_delete="CASCADE", related_name='user_levels')
+    user = models.ForeignKey(User, null=True, on_delete="CASCADE", related_name='user_levels')
+    points = models.IntegerField(null=False, default=0)
+    lastAccess = models.DateTimeField(default=datetime.now, null=True, blank=True)
+
+    def __str__(self):
+        return "UL "+self.user.username+" | "+str(self.db.id)
