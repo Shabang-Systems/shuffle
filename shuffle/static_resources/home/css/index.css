@@ -13,8 +13,8 @@ unless explicitly stated otherwise or where it is prohibited by law */
 
 .database {
     width: 98%;
-    transition: border-color 0.25s;
     margin-top: 10px;
+    transition: border-color 0.25s;
 }
 
 .database:hover {

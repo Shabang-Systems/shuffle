@@ -16,7 +16,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
         <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
-        <link href="{% static "home/css/index.css" %}" rel="stylesheet">
+        <link href="{% static "database/css/db.css" %}" rel="stylesheet">
         <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head> 
@@ -159,89 +159,81 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     </div>
                 </nav>
             </div>
-            <div id="main-wrapper" style="overflow:hidden;">
-                <div style="transform: translateX(20px); ">
-                    <h1 class="top-heading">Recent Databases</h1>
-                    <hr style="margin: 0; padding: 0 0 0 0; "\>
-                    <div id="cards">
-                        {% if databases.0 %}
-                        <h1 class="date-heading">Today</h1>
-                        {% endif %}
-                        {% for database in databases.0 %}
-                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
-                            <div class="card database">
-                                <div class="container">
-                                    <div class="row">
-                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
-                                        <div class="card-body">
-                                            <h5 class="card-title" style="text-u">{{database.0}}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
-                                            <p class="card-text">{{database.1}}</p>
-                                        </div>
-                                    </div>
+            <div id="main-wrapper" style="overflow:hidden; padding-right: 30px; padding-top: 10px">
+                <div style="transform: translateX(20px);">
+                    <div class="card" style="width: 98%;">
+                        <div class="card-body">
+                            <h5 class="card-title db-title">{{dbname}}</h5>
+                            <p class="card-text">{{dbdesc}}</p>
+                            <p class="card-text text-muted">a lovely db by @{{dbowner}}.</p>
+                            {% if dbPoints <= 0 %}
+                            <div class="card level-card" style="width:25%; background-color: rgb(242, 242, 242); float: left; margin: 10px 15px 10px 15px;">
+                                <div class="card-body">
+                                    <h5 class="card-title level-card-title">Your Level: Silver</h5>
+                                    <p class="card-text level-card-desc">Let's begin! Rock this set by hitting the <t style="color:#a05500">learn</t> button.</p>
                                 </div>
                             </div>
-                        </a>
-                        {% endfor %}
-                        {% if databases.1 %}
-                        <h1 class="date-heading">Yesterday</h1>
-                        {% endif %}
-                        {% for database in databases.1 %}
-                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
-                            <div class="card database">
-                                <div class="container">
-                                    <div class="row">
-                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{database.0}}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
-                                            <p class="card-text">{{database.1}}</p>
-                                        </div>
-                                    </div>
+                            {% elif dbPoints <= 1000 %}
+                            <div class="card level-card" style="width:25%; background-color: rgb(236, 251, 253); float: left; margin: 10px 15px 10px 15px;">
+                                <div class="card-body">
+                                    <h5 class="card-title level-card-title">Your Level: Blue</h5>
+                                    <p class="card-text level-card-desc">Keep it comin'! Earn a few more points by doing a few more learning sessions today!</p>
                                 </div>
                             </div>
-                        </a>
-                        {% endfor %}
-                        {% if databases.2 %}
-                        <h1 class="date-heading">This Week</h1>
-                        {% endif %}
-                        {% for database in databases.2 %}
-                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
-                            <div class="card database">
-                                <div class="container">
-                                    <div class="row">
-                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{database.0}}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
-                                            <p class="card-text">{{database.1}}</p>
-                                        </div>
-                                    </div>
+                            {% elif dbPoints <= 5000 %}
+                            <div class="card level-card" style="width:25%; background-color: rgb(218, 255, 233); float: left; margin: 10px 15px 10px 15px;">
+                                <div class="card-body">
+                                    <h5 class="card-title level-card-title">Your Level: Green</h5>
+                                    <p class="card-text level-card-desc">You're on fire! Keep the good effort coming and you will be <t style="color:orange">orange</t> in no time.</p>
                                 </div>
                             </div>
-                        </a>
-                        {% endfor %}
-                        {% if databases.3 %}
-                        <h1 class="date-heading">Older</h1>
-                        {% endif %}
-                        {% for database in databases.3 %}
-                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
-                            <div class="card database">
-                                <div class="container">
-                                    <div class="row">
-                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{database.0}}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
-                                            <p class="card-text">{{database.1}}</p>
-                                        </div>
-                                    </div>
+                            {% elif dbPoints <= 10000 %}
+                            <div class="card level-card" style="width:25%; background-color: rgb(218, 255, 233); float: left; margin: 10px 15px 10px 15px;">
+                                <div class="card-body">
+                                    <h5 class="card-title level-card-title">Your Level: Red</h5>
+                                    <p class="card-text level-card-desc">The Finish Line is in front of you! Just imagine the moment that you will cross that line and learn mastery!</p>
                                 </div>
                             </div>
-                        </a>
-                        {% endfor %}
+                            {% else %}
+                            <div class="card level-card" style="width:25%; background-color: rgb(255, 240, 219); float: left; margin: 10px 15px 10px 15px;">
+                                <div class="card-body">
+                                    <h5 class="card-title level-card-title">Your Level: Orange</h5>
+                                    <p class="card-text level-card-desc">The Goal. The End. You have achieved what it takes to be a vocab master! Now onto another set.</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <a href="/learn/l/{{dbid}}" class="btn btn-primary" style="margin-left: 10px">Learn + Review</a>
+                            <a href="/learn/t/{{dbid}}" class="btn btn-primary" style="margin-left: 10px">Level Up</a>
+                            <a href="/edit/{{dbid}}" class="btn" style="margin-left: 10px">Edit</a>
+                            <a href="#" class="btn" style="margin-left: 10px">Add to...</a>
+                            <a href="#" class="btn" style="margin-left: 10px">Share</a>
+                            <br \>
+                            <t class="mastery-counter" style="padding-left: 30px; margin-top: 10px">{{mastered}}</t>
+                            <t class="mastery-slash" style="margin-top: 10px; margin-left: 6px;">/</t>
+                            <t class="mastery-total" style="margin-top: 10px;">{{count}}</t>
+                            <br class="mastery-spacer" \>
+                            <t class="mastery-blurb" style="margin-top: 10px;">Words Mastered.</t>
+                        </div>  
                     </div>
-                    <t style="color: rgb(210, 210, 210); font-size: 10px; margin-top: 10px;">You seriously only have this many sets?<t>
+                    <div class="card" style="margin-top: 10px; width: 98%;">
+                        <div class="card-header" class="card-header" data-toggle="collapse" data-target="#words-collapse" aria-expanded="true" aria-controls="collapseTwo" style="text-decoration: none; cursor: pointer">
+                            Words
+                        </div>
+                        <div class="card-body collapse show" id="words-collapse" aria-labelledby="headingTwo">
+                            <div class="vocab-container">
+                                {% for word in words %}
+                                <div class="card vocab-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ word.0 }}</h5>
+                                        <p class="card-text" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ word.1 }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <t style="color: rgb(210, 210, 210); font-size: 10px;">You seriously only have this many words? Huh?<t>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <br />
             </div>
