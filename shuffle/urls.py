@@ -40,5 +40,6 @@ urlpatterns = [
     path('login/', account.views.signin),
     path('logout/', account.views.signout),
     path('databases/', include('database.urls')),
+    path('edit/', include('edit.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

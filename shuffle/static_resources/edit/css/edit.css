@@ -1,0 +1,149 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+.db-title {
+    font-family: 'Open Sans' sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #d47100
+}
+
+.top-text {
+    border-style: solid;
+    border-color: transparent;
+    transition: border-color 0.20s;
+    padding-left: 10px;
+    border-width: 0.5px;
+}
+
+.top-text:hover {
+    border-color: rgb(211, 97, 21);
+}
+
+.top-text:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-name {
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-color: rgb(225, 225, 225);
+    transition: border-color 0.20s;
+    outline: none;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-overflow: ellipsis;
+}
+
+.word-def {
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-color: rgb(225, 225, 225);
+    transition: border-color 0.20s;
+    outline: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-overflow: ellipsis;
+}
+
+.word-name:hover {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-name:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-def:hover {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-def:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.del-button {
+    cursor: pointer;
+    color: rgb(200, 200, 200);
+    transition: color 0.25s;
+}
+
+.del-button:hover {
+    cursor: pointer;
+    color: rgb(211, 97, 21);
+}
+
+.btn:not(.done) {
+    color: #be6600;
+    transition: color 0.5s, background-color 0.5s, border-color 0.5s;
+    border-color: #be6600;
+    margin-right: 5px;
+    margin-top: 20px;
+    width: 40%;
+    cursor: pointer;
+}
+
+
+.btn:not(.done):hover {
+    background-color: #be6600;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.done {
+    color: #ffffff;
+    transition: color 0.5s, background-color 0.5s, border-color 0.5s;
+    border-color: rgb(235, 122, 17);
+    background-color: rgb(235, 122, 17);
+    margin-right: 5px;
+    margin-top: 20px;
+    width: 20%;
+    cursor: pointer;
+}
+
+.done:hover {
+    background-color: #ffffff;
+    color: rgb(235, 122, 17);
+    border-color: rgb(235, 122, 17);
+}
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+   
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+
+  
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+}
