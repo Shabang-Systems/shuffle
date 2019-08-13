@@ -16,4 +16,5 @@ from . import views
 urlpatterns = [
     path('<int:database_id>/', views.edit_view, name="edit_view"),
     path('do_edit/', views.edit_do, name="edit_do"),
+    path('do_add/', views.edit_do, name="edit_apply"),
 ]

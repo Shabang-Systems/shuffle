@@ -55,6 +55,7 @@ unless explicitly stated otherwise or where it is prohibited by law */
         padding-top: 20px;
     }
 }
+
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 767px) and (max-width: 1199px) { 

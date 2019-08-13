@@ -21,6 +21,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from dbapi.models import Database
 
+@csrf_protect
 @login_required(login_url='/login')
 def index(request):
     template = loader.get_template('home/index.html')
@@ -33,6 +34,7 @@ def index(request):
     yesterday = []
     thisweek = []
     older = []
+    owned = []
     for database in databases:
         if database.lastAccess.date() >= datetime.today().date():
             today.append([database.db.name, database.db.description, database.db.owner.username, database.points, database.db.id])
@@ -42,4 +44,7 @@ def index(request):
             thisweek.append([database.db.name, database.db.description, database.db.owner.username, database.points, database.db.id])
         else:
             older.append([database.db.name, database.db.description, database.db.owner.username,database.points, database.db.id])
-    return HttpResponse(template.render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "databases": [today, yesterday, thisweek, older]}, request))
+    for database in databases:
+        if database.db.owner == request.user:
+            owned.append([database.db.name, database.db.description, database.db.owner.username, database.points, database.db.id])
+    return HttpResponse(template.render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "databases": [today, yesterday, thisweek, older], "owned": owned}, request))

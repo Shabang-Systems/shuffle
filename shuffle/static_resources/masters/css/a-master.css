@@ -18,10 +18,12 @@ body {
 
 #overlay {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     z-index: 100;
-    background-color: rgba(0,0,0,0.5);
     /* display: none; */
     top: 0;
     left: 0;
@@ -207,6 +209,89 @@ topnav {
     color: rgb(255, 217, 182);
 }
 
+.word-name {
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-color: rgb(225, 225, 225);
+    transition: border-color 0.20s;
+    outline: none;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-overflow: ellipsis;
+    width:80%;
+}
+
+.word-def {
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-color: rgb(225, 225, 225);
+    transition: border-color 0.20s;
+    outline: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-overflow: ellipsis;
+}
+
+.word-name:hover {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-name:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-def:hover {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-def:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+
+#form-submit {
+    border:none; 
+    border-radius: 4px; 
+    background-image: none;
+    background-color:#e0751c;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.5s;
+}
+
+#form-submit:hover {
+    background-color: rgb(194, 104, 2);
+}
+
+input:invalid:focus {
+    box-shadow:0 0 3px red;
+}
+
+.qadd {
+    color: #ffffff;
+    transition: color 0.5s, border-color 0.5s;
+    border-color: #fad3b1;
+    cursor: pointer;
+}
+
+
+.qadd:hover {
+    color: #d8d8d8;
+    border-color: #d8d8d8;
+}
+
 /* Large desktop */
 @media (min-width: 1200px) { 
     #story-wrapper {
@@ -323,6 +408,16 @@ topnav {
 
     .navbar {
         display: none;
+    }
+
+    #qa-wrapper-mobile {
+        display: none;
+    }
+    #qadd-desktop {
+        font-size: 17px;
+    }
+    #overlay-card {
+        width: auto;
     }
 }
  
@@ -443,6 +538,16 @@ topnav {
     .navbar {
         display: none;
     }
+
+    #qa-wrapper-mobile {
+        display: none;
+    }
+    #qadd-desktop {
+        font-size: 15px;
+    }
+    #overlay-card {
+        width: auto;
+    }
 }
  
 /* Landscape phone to portrait tablet */
@@ -561,6 +666,16 @@ topnav {
     .navbar {
         display: none;
     }
+
+    #qa-wrapper-mobile {
+        display: none;
+    }
+    #qadd-desktop {
+        font-size: 1.75vw;
+    }
+    #overlay-card {
+        width: auto;
+    }
 }
  
 /* Landscape phones and down */
@@ -615,5 +730,10 @@ topnav {
     .mobile-search-box:hover {
         background-color: rgba(221, 107, 0, 0.466);
     }
-
+    #qa-wrapper-mobile {
+        display: block;
+    }
+    #overlay-card {
+        width: 90%;
+    }
 }
