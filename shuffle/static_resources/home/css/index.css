@@ -40,6 +40,19 @@ unless explicitly stated otherwise or where it is prohibited by law */
     overflow: hidden;
 }
 
+.btn:not(.btn-primary):not(.qadd) {
+    color: #fd8700;
+    transition: color border-color 0.25s;
+    border-color: #fd8700;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.btn:not(.btn-primary):hover:not(.qadd) {
+    color: #a05500;
+    border-color: #a05500;
+}
+
 /* Large desktop */
 @media (min-width: 1199px) { 
     .top-heading {

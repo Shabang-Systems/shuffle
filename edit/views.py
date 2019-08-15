@@ -10,15 +10,14 @@ We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law
 '''
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 import json
 
-
-from dbapi.models import Database, Word
+from dbapi.models import Database, Word, LevelDesc
 
 @csrf_protect
 @login_required(login_url='/login')
@@ -29,13 +28,31 @@ def edit_view(request, database_id):
     folderContext = []
     for folder in folders:
         folderContext.append([folder.id, folder.name])
-    database = Database.objects.get(pk=database_id)
+    if database_id == "new":
+        database = Database(name="Untitled Database", description="", owner=request.user)
+        database.save()
+        LevelDesc(db=database, user=request.user, points=0, mastered=0).save()
+        Word(database=database).save()
+        database_id = database.id
+        return redirect("/edit/"+str(database_id))
+    else:
+        database = Database.objects.get(pk=int(database_id))
     if request.user != database.owner:
         return HttpResponse(panic_template.render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext}, request))
     words = []
     for word in database.words.all():
         words.append([[word.term, word.definition], word.id])
     return HttpResponse(template.render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "words": words, "dbname": database.name, "dbdesc": database.description, "dbowner": database.owner.username, "dbid": database_id, "count": len(database.words.all())}, request))
+
+
+@login_required(login_url='/login')
+def delete_do(request, database_id):
+    db = Database.objects.get(pk=database_id)
+    ld = LevelDesc.objects.filter(db=db)
+    ld.filter(user=request.user).delete()
+    if len(ld) < 1:
+        db.delete()
+    return redirect("/")
 
 @login_required(login_url='/login')
 def edit_do(request):
@@ -84,4 +101,5 @@ def edit_do(request):
                 latest = Word.objects.latest('id').id
                 responseObj = json.dumps({"status":"success", "id":latest})
                 return HttpResponse(responseObj, content_type="application/json")
+    return HttpResponse(json.dumps({"result":"bad_request", "action":"invalid_api_request"}), content_type="application/json")
 

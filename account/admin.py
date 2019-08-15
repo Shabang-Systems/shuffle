@@ -22,6 +22,7 @@ class CustomUAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
         (('Shuffle Status'), {'fields': ('verified', 'points')}),
+        (('Shuffle Preferences'), {'fields': ('setCount', )}),
     )
 
 

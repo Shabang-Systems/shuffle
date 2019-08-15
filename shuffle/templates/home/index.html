@@ -57,7 +57,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <input style="display:inline-block;" class="search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
                         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                     </form>
-                    <t class="qadd btn new-term" style="margin-right: 50px" id="qadd-desktop">Quick Add</t>
+                    <t class="qadd btn new-term" style="margin-right: 50px;" id="qadd-desktop">Quick Add</t>
                     <div id="account-dropdown-container">
                         <div id="account">
                             <img id="account-profile" src="{% static "masters/img/shuffle-profile.png" %}" alt="shuffle profile">
@@ -187,10 +187,11 @@ unless explicitly stated otherwise or where it is prohibited by law -->
             </div>
             <div id="main-wrapper" style="overflow:hidden;">
                 <div style="transform: translateX(20px); ">
-                    <div style="width: 85%; text-align: center;" id="qa-wrapper-mobile">
+                    <div style="width: 85%" id="qa-wrapper-mobile">
                         <t class="qadd btn new-term" style="margin-top: 20px; color: #e0751c; border-color: #e0751c">Quick Add</t>
                     </div>
-                    <h1 class="top-heading">Recent Databases</h1>
+                    <h1 style="display: inline-block;" class="top-heading">Recent Databases</h1>
+                    <a href="/edit/new" class="btn" style="display: inline-block; margin-bottom: 15px; margin-left: 10px">+</a>
                     <hr style="margin: 0; padding: 0 0 0 0; "\>
                     <div id="cards">
                         {% if databases.0 %}

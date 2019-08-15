@@ -16,15 +16,13 @@ unless explicitly stated otherwise or where it is prohibited by law -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
         <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
-        <link href="{% static "edit/css/edit.css" %}" rel="stylesheet">
-        <script src="{% static "masters/js/jquery_3.4.1_min.js" %}"></script>
-        <script src="{% static "masters/js/bootstrap/bootstrap.min.js" %}"></script>
+        <link href="{% static "learn/css/levelup.css" %}" rel="stylesheet">
         <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head> 
     <body>
         <div id="content-wrapper">
-            <div id="nav-wrapper">
+            <div id="nav-wrapper" style="overflow:hidden;">
                 <topnav class="clearfix">
                     <a href="/" style="padding-right: 3vw">
                         <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
@@ -161,57 +159,38 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     </div>
                 </nav>
             </div>
-            <div id="main-wrapper" style="overflow:hidden; padding-right: 30px; padding-top: 10px">
-              <div style="transform: translateX(20px);">
-                    <div class="card" style="width: 98%;">
-                        <div class="card-body">
-                            <input id="title-text" class="db-title top-text" style="display:inline-block;" type="text" name="search-field" autocomplete="off" value="{{dbname}}">
-                            <t class="saved" style="display: inline-block; float: right; font-size: 13px; color: green; display:none">&#10003; saved!</t>
-                            <input id="desc-text" class="top-text" type="text" style="display:block; width: 100%" name="search-field" autocomplete="off" placeholder="add a description?" value="{{dbdesc}}">
-                        </div> 
-                    </div>
-                    <div class="card" style="margin-top: 10px; width: 98%; ">
-                        <div class="card-header" class="card-header" data-toggle="collapse" data-target="#words-collapse" aria-expanded="true" aria-controls="collapseTwo" style="text-decoration: none; cursor: pointer">
-                            Edit
+            <div id="main-wrapper" style="padding-right: 30px; padding-top: 10px overflow:hidden;">
+                <div style="transform: translateX(20px);">
+                    <div class="card" style="width: 100%; height: 85vh;">
+                        <h1 id="level-up-text" class="card-title" style="color: #ca710a; font-weight: 500; font-size: 22px; padding-left: 10px; padding-top: 10px">
+                            It's time to level up.
+                            <t style="font-weight: 700">
+                                Term
+                                <t id="terms-done" style="color: #e06501">1</t>/<t>{{testsize}}</t>
+                            </t>
+                        </h1>
+                        <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+                            <h1 id="define-text" class="card-title" style="color: #d47100; font-weight: 700;">Define: <t id="question" style="color: black">{{ firstterm }}</t></h1>
                         </div>
-                        <div style="width: 100%; text-align: center;">
-                            <t class="btn new-term">New Term</t>
-                            <t class="btn done">Done</t>
-                        </div>
-                        <div class="card-body collapse show" id="words-collapse" aria-labelledby="headingTwo">
-                            <div class="vocab-container">
-                                <hr style="margin: 0; padding:0; border-color: rgb(210, 210, 210);"/>
-                                <div id="words">
-                                    {% for word in words %}
-                                    <div class="card vocab-card" style="border-style: none;">
-                                        <div class="card-body">
-                                            <t id="del-{{ word.1 }}" class="del-button">&#x2715;</t> <br />
-                                            <input id="word-name-{{ word.1 }}" class="word-name" style="display:inline-block;" type="text" name="search-field" autocomplete="off" value="{{ word.0.0 }}">
-                                            <input id="word-def-{{ word.1 }}" class="word-def" type="text" style="display:block; width: 100%;" name="search-field" autocomplete="off" value="{{ word.0.1 }}">
-                                        </div>
-                                    </div>
-                                    <hr id="bottom-divider-{{ word.1 }}" class="bottom-divider" style="margin: 0; padding:0; border-color: rgb(210, 210, 210);"/>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div style="width: 100%; text-align: center; padding-bottom: 10px;">
-                                <t class="btn new-term">New Term</t>
-                                <t class="btn done">Done</t>
-                            </div>
-                            <t class="saved" style="display: inline-block; float: right; font-size: 13px; color: green; display:none">&#10003; saved!</t>
-                            <t style="color: rgb(210, 210, 210); font-size: 10px;">You seriously only have this many words? Huh?<t>
+                        <div class="bottom">
+                            <input id="answer-field" type="text" placeholder="Type the definition here." autocomplete="off">
+                            <a id="lu-button" class="btn btn-primary" style="color: white;">Next</a>
                         </div>
                     </div>
                 </div>
-                 <br />
+                <br />
             </div>
         </div>
+        <script src="{% static "masters/js/jquery_3.4.1_min.js" %}"></script>
+        <script src="{% static "masters/js/bootstrap/bootstrap.min.js" %}"></script>
         <script>
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
 
+            var word_id = "{{ firstid }}";
+            
             function getCookie(name) {
                 var cookieValue = null;
                 if (document.cookie && document.cookie !== '') {
@@ -228,155 +207,88 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                 return cookieValue;
             }
 
-            var doneTypingInterval = 300;
+            var correct = 0;
+            var incorrect = 0;
 
-            function build(elem) {
-                var typingTimer;
-                elem = "#"+elem
-                $(elem).on('keyup', function () {
-                    clearTimeout(typingTimer);
-                    typingTimer = setTimeout(function(){
-                        
-                        $.ajax({
-                            url:'/edit/do_edit/',
-                            type:'post',
-                            headers: {
-                                "X-CSRFToken": getCookie('csrftoken')
-                            },
-                            data: {
-                                'type':$(elem)[0].id,
-                                'db-id': {{dbid}},
-                                'content': $(elem)[0].value,
-                            },
-                            complete: function() {
-                                $(".saved").fadeIn(500);
-                                var save;
-                                save = setTimeout(function(){
-                                    $(".saved").fadeOut(200);
-                                }, 2000);
-                            }
-                        });     
-                    }, doneTypingInterval);
-                });
-                $(elem).on('keydown', function () {
-                    clearTimeout(typingTimer);
-                });
-                $(elem).focusout(function () {
-                    $.ajax({
-                        url:'/edit/do_edit/',
-                        type:'post',
-                        headers: {
-                            "X-CSRFToken": getCookie('csrftoken')
-                        },
-                        data: {
-                            'type':$(elem)[0].id,
-                            'db-id': {{dbid}},
-                            'content': $(elem)[0].value,
-                        },
-                        complete: function() {
-                            $(".saved").fadeIn(500);
-                            var save;
-                            save = setTimeout(function(){
-                                $(".saved").fadeOut(200);
-                            }, 2000);
-                        }
-                    });     
-                })
-            }
-
-            build("title-text");
-            build("desc-text");
-            {% for word in words %}
-                build("word-name-{{ word.1 }}");
-                build("word-def-{{ word.1 }}");
-                $("#del-{{ word.1 }}").click(function () {
-                    $.ajax({
-                        url:'/edit/do_edit/',
-                        type:'post',
-                        headers: {
-                            "X-CSRFToken": getCookie('csrftoken')
-                        },
-                        data: {
-                            'type':"del",
-                            'db-id': {{ dbid }},
-                            'content': {{ word.1 }},
-                        },
-                        complete: function() {
-                            $("#del-{{ word.1 }}").parents(".vocab-card").hide(1000);
-                            $("#bottom-divider-{{ word.1 }}").fadeOut(1000);
-                        }
-                    });   
-                });
-            {% endfor %}
-            $(".done").click(function () {
-                window.location.href = '/databases/'+{{ dbid }};
-            })
-            $(".new-term").click(function () {
+            function submitAnswer() {
                 $.ajax({
-                    url:'/edit/do_edit/',
+                    url:'/learn/do_t/',
                     type:'post',
                     headers: {
                         "X-CSRFToken": getCookie('csrftoken')
                     },
                     data: {
-                        'type':"new",
-                        'request': "word_id",
-                        'db-id': {{ dbid }},
+                        'type':"del",
+                        'dbid': {{ dbid }},
+                        'word-id': word_id,
+                        'answer': $("#answer-field").val(),
                     },
                     complete: function(d) {
-                        var word_id = d['responseJSON']['id'];
-                        var cln = $(".vocab-card")[0].cloneNode(true);
-                        cln.getElementsByClassName("del-button")[0].id = "del-"+d['responseJSON']['id']
-                        cln.getElementsByClassName("word-name")[0].id = "word-name-"+d['responseJSON']['id']
-                        cln.getElementsByClassName("word-name")[0].value = ""
-                        cln.getElementsByClassName("word-def")[0].id = "word-def-"+d['responseJSON']['id']
-                        cln.getElementsByClassName("word-def")[0].value = ""
-                        var cln_ln = $(".bottom-divider").slice(-1)[0].cloneNode(true);
-                        $("#words").get()[0].appendChild(cln);
-                        $("#words").get()[0].appendChild(cln_ln);
-                        build("word-name-"+d['responseJSON']['id']);
-                        build("word-def-"+d['responseJSON']['id']);
-                        $("#"+"del-"+d['responseJSON']['id']).click(function () {
-                            $.ajax({
-                                url:'/edit/do_edit/',
-                                type:'post',
-                                headers: {
-                                    "X-CSRFToken": getCookie('csrftoken')
-                                },
-                                data: {
-                                    'type':"del",
-                                    'db-id': {{ dbid }},
-                                    'content': d['responseJSON']['id'],
-                                },
-                                complete: function() {
-                                    $("#"+"del-"+d['responseJSON']['id']).parents(".vocab-card").hide(750);
-                                    $(cln_ln).fadeOut(750);
+                        var responseJSON = d["responseJSON"]
+                        if (responseJSON["result"] == "failed") {
+                            incorrect++;
+                            $("#question").val();
+                            if (responseJSON["action"] == "next") {
+                                $('#question').fadeOut('fast',function(){
+                                    $("#answer-field").val("");
+                                    $(this).html(responseJSON["term"]).fadeIn("slow");
+                                });
+                            } else if (responseJSON["action"] == "done") {
+                                $('.bottom').fadeOut('fast');
+                                $('#level-up-text').fadeOut('fast',function(){
+                                    $(this).html("You are done. Redirecting...").fadeIn("slow");
+                                });
+                                $('#define-text').fadeOut('fast',function(){
+                                    $(this).html(correct+'<t id="question" style="color: black; padding-left: 10px">out of {{ testsize }}</t>').fadeIn("slow");
+                                });
+                                save = setTimeout(function(){
+                                    window.location.href = '/databases/'+{{ dbid }};
+                                }, 2000);
+                            }
+                        }
+                        else if(responseJSON["result"] == "success"){
+                            correct++;
+                            $("#question").val();
+                            if (responseJSON["action"] == "next") {
+                                $('#question').fadeOut('fast',function(){
+                                    $("#answer-field").val("");
+                                    $(this).html(responseJSON["term"]).fadeIn("slow");
+                                });
+                            } else if (responseJSON["action"] == "done") {
+                                $('.bottom').fadeOut('fast');
+                                $('#level-up-text').fadeOut('fast',function(){
+                                    $(this).html("You are done. Redirecting...").fadeIn("slow");
+                                });
+                                $('#define-text').fadeOut('fast',function(){
+                                    $(this).html(correct+'<t id="question" style="color: black; padding-left: 10px">out of {{ testsize }}</t>').fadeIn("slow");
+                                });
+                                save = setTimeout(function(){
+                                    window.location.href = '/databases/'+{{ dbid }};
+                                }, 2000);
+                            }
+                        }
+                        $('#terms-done').fadeOut('fast',function(){
+                                if (correct+incorrect+1 > {{testsize}}) {
+                                    $(this).html("Bonus").fadeIn("slow");
                                 }
-                            });   
+                                else {
+                                    $(this).html(correct+incorrect+1).fadeIn("slow");
+                                }
                         });
-                        $([document.documentElement, document.body]).animate({
-                            scrollTop: $("#"+"word-name-"+d['responseJSON']['id']).offset().top
-                        }, 1000);
-                        $("#"+"word-name-"+d['responseJSON']['id']).focus()
-                        
-                        // console.log(d['responseJSON']['id'])
-                        // cln.children(".del-button").attr("id","del-"+d['responseJSON']['id']);
-                        // console.log(cln.children(".del-button").id)
-                        // cln.children(".word-name").attr("id", "word-name-"+d['responseJSON']['id']);
-                        // cln.children(".word-def").attr("id", "word-def-"+d['responseJSON']['id'])
-                        // cln.children(".word-name").val("")
-                        // cln.children(".word-def").val("")
-                        // var cln_ln = $($(".bottom-divider").slice(-1)[0].cloneNode(true));
-                        // cln_ln.id = "bottom-divider-"+d['responseJSON']['id'];
-                        // $("#words").get()[0].appendChild(cln[0]);
-                        // $("#words").get()[0].appendChild(cln_ln[0]);
+                        word_id =  responseJSON["termid"];
                     }
-                });
+                }); 
+            }
+
+            
+            
+            $("#lu-button").click(submitAnswer);
+
+            $('#answer-field').keypress(function (e) {
+                if (e.which == 13) {
+                    submitAnswer();
+                }
             });
-
-            // var cln = $($(".vocab-card")[0].cloneNode(true));
-            // cln.children(".del-button").id
-
         </script>
     </body>
 </html>

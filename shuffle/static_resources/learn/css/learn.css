@@ -1,0 +1,95 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+.btn-primary {
+    background-color: orange;
+    border-color: #d47100 !important;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+
+.btn-primary:hover {
+    background-color: #d6862a;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: #b16816 !important;
+}
+
+.btn:active {
+    background-color: #b16816 !important;
+}
+
+.vocab-container {
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.vocab-card {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: default;
+}
+
+.btn:not(.btn-primary) {
+    color: #fd8700;
+    transition: color border-color 0.25s;
+    border-color: #fd8700;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.btn:not(.btn-primary):hover {
+    color: #a05500;
+    border-color: #a05500;
+}
+
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    .vocab-card {
+        height: 100px;
+        width: 210px;
+    }
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+
+    .vocab-card {
+        height: 100px;
+        width: 150px;
+    }
+
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+
+    .vocab-card {
+        height: 100px;
+        width: 100%;
+    }
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+    .vocab-card {
+        height: 100px;
+        width: 100%;
+    }
+
+
+}

@@ -1,0 +1,123 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+.bottom {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    width: 95%;
+}
+
+#answer-field {
+    outline: none;
+    border-style:solid;
+    border-width: 0.5px;
+    border-color: rgb(200, 200, 200);
+    border-radius: 5px;
+    transition: border-color 0.25s;
+    padding-left: 10px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+#answer-field:focus, #answer-field:focus, #answer-field:hover{
+    border-color: #d47100;
+}
+
+.btn-primary {
+    background-color: orange;
+    border-color: #d47100 !important;
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+
+.btn-primary:hover {
+    background-color: #d6862a;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: #d47100;
+}
+
+.btn:active {
+    background-color: #b16816 !important;
+}
+
+#answer-field::placeholder { /* Most modern browsers support this now. */
+    color: rgb(200, 200, 200);
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    
+    #answer-field {
+        font-size: 25px;
+        height: 50px;
+        width: 90%;
+    }
+
+    #answer-field::placeholder {
+        font-size: 25px;
+    }
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+
+    #answer-field {
+        font-size: 20px;
+        height: 45px;
+        width: 85%;
+    }
+
+    #answer-field::placeholder {
+        font-size: 20px;
+    }
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+
+    #answer-field {
+        font-size: 17px;
+        height: 35px;
+        width: 65%;
+    }
+
+    #answer-field::placeholder {
+        font-size: 17px;
+    }
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+    #answer-field {
+        font-size: 17px;
+        height: 30px;
+        width: 65%;
+    }
+
+    #answer-field::placeholder {
+        font-size: 14px;
+    }
+
+}

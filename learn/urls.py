@@ -14,8 +14,8 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('do_edit/', views.edit_do, name="edit_do"),
-    path('do_add/', views.edit_do, name="edit_apply"),
-    path('delete/<int:database_id>/', views.delete_do, name="delete_do"),
-    path('<slug:database_id>/', views.edit_view, name="edit_view"),
+    path('l/<int:database_id>/', views.learn_view, name="learn_view"),
+    path('t/<int:database_id>/', views.level_up_view, name="level_up_view"),
+    path('do_t/', views.level_up_do, name="level_up_do"),
+    path('cards/<int:database_id>/', views.cards_view, name="learn_cards_view"),
 ]
