@@ -30,7 +30,7 @@ from django.urls import path
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-import account
+import account, testing_helper
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,6 +38,11 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('', include('home.urls')),
     path('login/', account.views.signin),
-    path('logout/', account.views.signout)
+    path('logout/', account.views.signout),
+    path('databases/', include('database.urls')),
+    path('edit/', include('edit.urls')),
+    path('learn/', include('learn.urls')),
+    path('nyd/', include('testing_helper.urls')),
+    path('search/', include('testing_helper.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

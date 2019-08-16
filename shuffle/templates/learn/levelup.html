@@ -1,0 +1,294 @@
+<!-- Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>#!/Shuffle</title>
+        <link href="{% static "masters/css/bootstrap/bootstrap.css" %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+        <link href="{% static "masters/css/a-master.css" %}" rel="stylesheet">
+        <link href="{% static "learn/css/levelup.css" %}" rel="stylesheet">
+        <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head> 
+    <body>
+        <div id="content-wrapper">
+            <div id="nav-wrapper" style="overflow:hidden;">
+                <topnav class="clearfix">
+                    <a href="/" style="padding-right: 3vw">
+                        <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
+                    </a>
+                    <form class="search" action="/search/" method="get" style="display: inline-block">
+                        <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
+                        <input style="display:inline-block;" class="search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
+                        <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
+                    </form>
+                    <div id="account-dropdown-container">
+                        <div id="account">
+                            <img id="account-profile" src="{% static "masters/img/shuffle-profile.png" %}" alt="shuffle profile">
+                            <div id="account-info">
+                                {% if firstname %}
+                                {{firstname}}
+                                {% else %}
+                                @{{username}}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div id="account-dropdown" style="display:none">
+                            <div class="acct-dropdown-item">
+                                <div style="display:inline-block; font-weight: 700; font-size: 20px; ">@{{username}}</div>
+                                {% if points <= 10000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
+                                {% elif points <= 20000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
+                                {% elif points <= 50000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Advanced</t>
+                                {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 200000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
+                                {% elif points <= 500000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; GrandMaster</t>
+                                {% endif %}
+                            </div>
+                            <hr style="padding:0; margin:0; transform: translateY(-5px);"/>
+                            <div class="acct-dropdown-item">
+                                <a href="/nyd" class="acct-dropdown-large" style="text-decoration: none;">Settings</a>
+                            </div>
+                            <div class="acct-dropdown-item">
+                                <a href="/nyd" class="acct-dropdown-large" style="text-decoration: none;">Developers</a>
+                            </div>
+                            <div class="acct-dropdown-item"  style="float: right;">
+                                <a href="/logout" class="acct-dropdown-small" style="text-decoration: none;">Logout</a>
+                            </div>
+                            <div class="acct-dropdown-item" style="float: right;">
+                                <a href="/nyd" class="acct-dropdown-small" style="text-decoration: none;">About</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </topnav>
+                <sidenav class="clearfix">
+                    <div class="sidenav-item active">
+                        <a class="sidenav-link active" href="/">Home</a>
+                    </div>
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="/nyd">Discover</a>
+                    </div>
+                    <hr \>
+                    <h3 class="nav-section">Folders</h3>
+                    {% for folder in folders %}
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" href="folders/{{ folder.0 }}">{{ folder.1 }}</a>
+                    </div>
+                    <hr style="margin:0; padding:0; width: 80%"\>
+                    {% endfor %}
+                    <div class="sidenav-item">
+                        <a class="sidenav-link" style="color: rgb(200, 200, 200) "href="/nyd">+New</a>
+                    </div>
+                </sidenav>
+                
+                <nav class="navbar navbar-expand-sm navbar-light" style="background-color: rgb(255, 123, 0);">
+                    <button type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" style="background: Transparent no-repeat; border: none;overflow: hidden;outline:none;box-shadow: none;-webkit-box-shadow: none;-moz-box-shadow: none;transform: translateY(3px);">
+                        <t style="font-size: 30px; color: white;">&#8801;</t>
+                    </button>
+                    
+                    <a href="/" class="navbar-brand"><img class="navbar-brand" style="width: 130px; padding-left: 10px;"; src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding"></a>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <form class="mobile-search" action="/search/" method="get" style="display: inline-block">
+                            <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
+                            <input style="display:inline-block;" class="mobile-search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
+                            <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
+                        </form>
+                        <hr style="padding:0; margin:0; border: none; border-bottom: 0.1px solid orange;"/>
+                        <ul class="navbar-nav mr-auto" style="overflow-x: hidden">
+                            <li class="nav-item active">
+                                <a class="nav-link" style="color: white" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white" href="/nyd">Discover</a>
+                            </li>
+                            <hr style="padding:0; margin:0;"/>
+                            <t style="transform: translateY(8px); font-size: 12px;color: rgb(255, 217, 182);">Folders</t>
+                            {% for folder in folders %}
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white" href="folders/{{ folder.0 }}">{{ folder.1 }}</a>
+                            </li>
+                            {% endfor %}
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white" href="/nyd">+New</a>
+                            </li>
+                            <a href="/nyd" style="text-decoration: none; transform: translateX(75vw); font-size: 12px;color: rgb(255, 217, 182); padding-bottom: 5px">More...</a>
+                            <hr style="padding:0; margin:0;"/>
+                            <div class="acct-dropdown-item">
+                                <div style="display:inline-block; font-weight: 700; font-size: 20px; color:white;">@{{username}}</div>
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px; color:white;">
+                                {% if points <= 10000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
+                                {% elif points <= 20000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
+                                {% elif points <= 50000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Advanced</t>
+                                {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 200000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
+                                {% elif points <= 500000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; GrandMaster</t>
+                                {% endif %}
+                                </t>
+                            </div>
+                            <div class="acct-dropdown-item"  style="float: right; display:inline-block">
+                            <a href="/nyd" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; padding-right: 10px; color: white;">About</a>
+                                <a href="/logout" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; color: white;">Logout</a>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div id="main-wrapper" style="padding-right: 30px; padding-top: 10px overflow:hidden;">
+                <div style="transform: translateX(20px);">
+                    <div class="card" style="width: 100%; height: 85vh;">
+                        <h1 id="level-up-text" class="card-title" style="color: #ca710a; font-weight: 500; font-size: 22px; padding-left: 10px; padding-top: 10px">
+                            It's time to level up.
+                            <t style="font-weight: 700">
+                                Term
+                                <t id="terms-done" style="color: #e06501">1</t>/<t>{{testsize}}</t>
+                            </t>
+                        </h1>
+                        <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+                            <h1 id="define-text" class="card-title" style="color: #d47100; font-weight: 700;">Define: <t id="question" style="color: black">{{ firstterm }}</t></h1>
+                        </div>
+                        <div class="bottom">
+                            <input id="answer-field" type="text" placeholder="Type the definition here." autocomplete="off">
+                            <a id="lu-button" class="btn btn-primary" style="color: white;">Next</a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <script src="{% static "masters/js/jquery_3.4.1_min.js" %}"></script>
+        <script src="{% static "masters/js/bootstrap/bootstrap.min.js" %}"></script>
+        <script>
+            $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
+            $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
+            $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
+            $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
+
+            var word_id = "{{ firstid }}";
+            
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            var correct = 0;
+            var incorrect = 0;
+
+            function submitAnswer() {
+                $.ajax({
+                    url:'/learn/do_t/',
+                    type:'post',
+                    headers: {
+                        "X-CSRFToken": getCookie('csrftoken')
+                    },
+                    data: {
+                        'type':"del",
+                        'dbid': {{ dbid }},
+                        'word-id': word_id,
+                        'answer': $("#answer-field").val(),
+                    },
+                    complete: function(d) {
+                        var responseJSON = d["responseJSON"]
+                        if (responseJSON["result"] == "failed") {
+                            incorrect++;
+                            $("#question").val();
+                            if (responseJSON["action"] == "next") {
+                                $('#question').fadeOut('fast',function(){
+                                    $("#answer-field").val("");
+                                    $(this).html(responseJSON["term"]).fadeIn("slow");
+                                });
+                            } else if (responseJSON["action"] == "done") {
+                                $('.bottom').fadeOut('fast');
+                                $('#level-up-text').fadeOut('fast',function(){
+                                    $(this).html("You are done. Redirecting...").fadeIn("slow");
+                                });
+                                $('#define-text').fadeOut('fast',function(){
+                                    $(this).html(correct+'<t id="question" style="color: black; padding-left: 10px">out of {{ testsize }}</t>').fadeIn("slow");
+                                });
+                                save = setTimeout(function(){
+                                    window.location.href = '/databases/'+{{ dbid }};
+                                }, 2000);
+                            }
+                        }
+                        else if(responseJSON["result"] == "success"){
+                            correct++;
+                            $("#question").val();
+                            if (responseJSON["action"] == "next") {
+                                $('#question').fadeOut('fast',function(){
+                                    $("#answer-field").val("");
+                                    $(this).html(responseJSON["term"]).fadeIn("slow");
+                                });
+                            } else if (responseJSON["action"] == "done") {
+                                $('.bottom').fadeOut('fast');
+                                $('#level-up-text').fadeOut('fast',function(){
+                                    $(this).html("You are done. Redirecting...").fadeIn("slow");
+                                });
+                                $('#define-text').fadeOut('fast',function(){
+                                    $(this).html(correct+'<t id="question" style="color: black; padding-left: 10px">out of {{ testsize }}</t>').fadeIn("slow");
+                                });
+                                save = setTimeout(function(){
+                                    window.location.href = '/databases/'+{{ dbid }};
+                                }, 2000);
+                            }
+                        }
+                        $('#terms-done').fadeOut('fast',function(){
+                                if (correct+incorrect+1 > {{testsize}}) {
+                                    $(this).html("Bonus").fadeIn("slow");
+                                }
+                                else {
+                                    $(this).html(correct+incorrect+1).fadeIn("slow");
+                                }
+                        });
+                        word_id =  responseJSON["termid"];
+                    }
+                }); 
+            }
+
+            
+            
+            $("#lu-button").click(submitAnswer);
+
+            $('#answer-field').keypress(function (e) {
+                if (e.which == 13) {
+                    submitAnswer();
+                }
+            });
+        </script>
+    </body>
+</html>

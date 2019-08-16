@@ -20,18 +20,44 @@ unless explicitly stated otherwise or where it is prohibited by law -->
         <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head> 
+    <div id="overlay" style="display:none">
+        <div id="overlay-card" class="card" style="box-shadow: 1px 1px 3px black">
+            <div class="card-header">
+                Quick Add
+                <t id="remove-overlay" style="float:right; cursor: pointer">&#x2715;</t>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Let's add a word.</h5>
+                <p class="card-text"><small class="text-muted">Note: you need to own databases that you add new words to.</small></p>
+                <form id="quick-add" action="/edit/go" method="post" style="display: inline-block; padding-top: 10px;">
+                    <t style="display: inline-block">Term:</t> <input class="word-name" style="display:inline-block; height: 40px; margin-left: 5px" type="text" name="search-field" autocomplete="off" value="">
+                    <br \>
+                    <t style="display: inline-block">Definition:</t> <input class="word-def" type="text" style="display:inline-block; width: 50%; height: 40px; margin-left: 5px" name="search-field" autocomplete="off" value="">
+                    <br \> <br \>
+                    <select id="db-id">
+                        {% for database in owned %}
+                            <option value="{{ database.4 }}">{{ database.0 }}</option>
+                        {% endfor %}
+                    </select>
+                    &rarr;
+                    <input id="form-submit" type="submit" value="Submit."/>
+                </form>
+            </div>
+        </div>
+    </div>
     <body>
         <div id="content-wrapper">
-            <div id="nav-wrapper" style="height:100%; width:100%;">
-                <topnav>
+            <div id="nav-wrapper">
+                <topnav class="clearfix">
                     <a href="/" style="padding-right: 3vw">
                         <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
                     </a>
-                    <form class="search" action="/search/" method="post" style="display: inline-block">
+                    <form class="search" action="/search/" method="get" style="display: inline-block">
                         <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
                         <input style="display:inline-block;" class="search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
                         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                     </form>
+                    <t class="qadd btn new-term" style="margin-right: 50px;" id="qadd-desktop">Quick Add</t>
                     <div id="account-dropdown-container">
                         <div id="account">
                             <img id="account-profile" src="{% static "masters/img/shuffle-profile.png" %}" alt="shuffle profile">
@@ -46,45 +72,45 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <div id="account-dropdown" style="display:none">
                             <div class="acct-dropdown-item">
                                 <div style="display:inline-block; font-weight: 700; font-size: 20px; ">@{{username}}</div>
-                                {% if points <= 1000 %}
+                                {% if points <= 10000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
-                                {% elif points <= 5000 %}
+                                {% elif points <= 20000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
-                                {% elif points <= 10000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Master</t>
                                 {% elif points <= 50000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Advanced</t>
                                 {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 200000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
-                                {% elif points <= 1000000 %}
+                                {% elif points <= 500000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
-                                {% elif points <= 10000000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; G_d</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; GrandMaster</t>
                                 {% endif %}
                             </div>
                             <hr style="padding:0; margin:0; transform: translateY(-5px);"/>
                             <div class="acct-dropdown-item">
-                                <a href="#" class="acct-dropdown-large" style="text-decoration: none;">Settings</a>
+                                <a href="/nyd" class="acct-dropdown-large" style="text-decoration: none;">Settings</a>
                             </div>
                             <div class="acct-dropdown-item">
-                                <a href="#" class="acct-dropdown-large" style="text-decoration: none;">Developers</a>
+                                <a href="/nyd" class="acct-dropdown-large" style="text-decoration: none;">Developers</a>
                             </div>
                             <div class="acct-dropdown-item"  style="float: right;">
-                                <a href="logout" class="acct-dropdown-small" style="text-decoration: none;">Logout</a>
+                                <a href="/logout" class="acct-dropdown-small" style="text-decoration: none;">Logout</a>
                             </div>
                             <div class="acct-dropdown-item" style="float: right;">
-                                <a href="#" class="acct-dropdown-small" style="text-decoration: none;">About</a>
+                                <a href="/nyd" class="acct-dropdown-small" style="text-decoration: none;">About</a>
                             </div>
                             
                         </div>
                     </div>
                 </topnav>
-                <sidenav>
+                <sidenav class="clearfix">
                     <div class="sidenav-item active">
-                        <a class="sidenav-link active" href="#">Home</a>
+                        <a class="sidenav-link active" href="/">Home</a>
                     </div>
                     <div class="sidenav-item">
-                        <a class="sidenav-link" href="#">Discover</a>
+                        <a class="sidenav-link" href="/nyd">Discover</a>
                     </div>
                     <hr \>
                     <h3 class="nav-section">Folders</h3>
@@ -95,7 +121,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     <hr style="margin:0; padding:0; width: 80%"\>
                     {% endfor %}
                     <div class="sidenav-item">
-                        <a class="sidenav-link" style="color: rgb(200, 200, 200) "href="#">+New</a>
+                        <a class="sidenav-link" style="color: rgb(200, 200, 200) "href="/nyd">+New</a>
                     </div>
                 </sidenav>
                 
@@ -104,9 +130,9 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <t style="font-size: 30px; color: white;">&#8801;</t>
                     </button>
                     
-                    <a href="#" class="navbar-brand"><img class="navbar-brand" style="width: 130px; padding-left: 10px;"; src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding"></a>
+                    <a href="/" class="navbar-brand"><img class="navbar-brand" style="width: 130px; padding-left: 10px;"; src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding"></a>
                     <div class="collapse navbar-collapse" id="navbarText">
-                        <form class="mobile-search" action="/search/" method="post" style="display: inline-block">
+                        <form class="mobile-search" action="/search/" method="get" style="display: inline-block">
                             <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
                             <input style="display:inline-block;" class="mobile-search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
                             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
@@ -114,10 +140,10 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <hr style="padding:0; margin:0; border: none; border-bottom: 0.1px solid orange;"/>
                         <ul class="navbar-nav mr-auto" style="overflow-x: hidden">
                             <li class="nav-item active">
-                                <a class="nav-link" style="color: white" href="#">Home</a>
+                                <a class="nav-link" style="color: white" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="color: white" href="#">Discover</a>
+                                <a class="nav-link" style="color: white" href="/nyd">Discover</a>
                             </li>
                             <hr style="padding:0; margin:0;"/>
                             <t style="transform: translateY(8px); font-size: 12px;color: rgb(255, 217, 182);">Folders</t>
@@ -127,41 +153,127 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                             </li>
                             {% endfor %}
                             <li class="nav-item">
-                                <a class="nav-link" style="color: white" href="#">+New</a>
+                                <a class="nav-link" style="color: white" href="/nyd">+New</a>
                             </li>
-                            <a href="#" style="text-decoration: none; transform: translateX(75vw); font-size: 12px;color: rgb(255, 217, 182); padding-bottom: 5px">More...</a>
+                            <a href="/nyd" style="text-decoration: none; transform: translateX(75vw); font-size: 12px;color: rgb(255, 217, 182); padding-bottom: 5px">More...</a>
                             <hr style="padding:0; margin:0;"/>
                             <div class="acct-dropdown-item">
                                 <div style="display:inline-block; font-weight: 700; font-size: 20px; color:white;">@{{username}}</div>
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px; color:white;">
-                                {% if points <= 1000 %}
+                                {% if points <= 10000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
-                                {% elif points <= 5000 %}
+                                {% elif points <= 20000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
-                                {% elif points <= 10000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Master</t>
                                 {% elif points <= 50000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Advanced</t>
                                 {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 200000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
-                                {% elif points <= 1000000 %}
+                                {% elif points <= 500000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
-                                {% elif points <= 10000000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; G_d</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; GrandMaster</t>
                                 {% endif %}
                                 </t>
                             </div>
                             <div class="acct-dropdown-item"  style="float: right; display:inline-block">
-                            <a href="#" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; padding-right: 10px; color: white;">About</a>
-                                <a href="logout" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; color: white;">Logout</a>
+                            <a href="/nyd" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; padding-right: 10px; color: white;">About</a>
+                                <a href="/logout" class="acct-dropdown-small" style="text-decoration: none; display:inline-block; color: white;">Logout</a>
                             </div>
                         </ul>
                     </div>
                 </nav>
             </div>
-            
-            <div id="story-wrapper">
-
+            <div id="main-wrapper" style="overflow:hidden;">
+                <div style="transform: translateX(20px); ">
+                    <div style="width: 85%" id="qa-wrapper-mobile">
+                        <t class="qadd btn new-term" style="margin-top: 20px; color: #e0751c; border-color: #e0751c">Quick Add</t>
+                    </div>
+                    <h1 style="display: inline-block;" class="top-heading">Recent Databases</h1>
+                    <a href="/edit/new" class="btn" style="display: inline-block; margin-bottom: 15px; margin-left: 10px">+</a>
+                    <hr style="margin: 0; padding: 0 0 0 0; "\>
+                    <div id="cards">
+                        {% if databases.0 %}
+                        <h1 class="date-heading">Today</h1>
+                        {% endif %}
+                        {% for database in databases.0 %}
+                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
+                            <div class="card database">
+                                <div class="container">
+                                    <div class="row">
+                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="text-u">{{database.0}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
+                                            <p class="card-text">{{database.1}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                        {% if databases.1 %}
+                        <h1 class="date-heading">Yesterday</h1>
+                        {% endif %}
+                        {% for database in databases.1 %}
+                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
+                            <div class="card database">
+                                <div class="container">
+                                    <div class="row">
+                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{database.0}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
+                                            <p class="card-text">{{database.1}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                        {% if databases.2 %}
+                        <h1 class="date-heading">This Week</h1>
+                        {% endif %}
+                        {% for database in databases.2 %}
+                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
+                            <div class="card database">
+                                <div class="container">
+                                    <div class="row">
+                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{database.0}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
+                                            <p class="card-text">{{database.1}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                        {% if databases.3 %}
+                        <h1 class="date-heading">Older</h1>
+                        {% endif %}
+                        {% for database in databases.3 %}
+                        <a href="/databases/{{ database.4 }}" style="text-decoration: none; color: black">
+                            <div class="card database">
+                                <div class="container">
+                                    <div class="row">
+                                        {% comment %} <img class="card-img-left db-image" src="{% static "masters/img/shuffle-db-blue.png" %}" alt=""> {% endcomment %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{database.0}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{database.2}}</h6>
+                                            <p class="card-text">{{database.1}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <t style="color: rgb(210, 210, 210); font-size: 10px; margin-top: 10px;">You seriously only learned this much?<t>
+                </div>
+                <br />
             </div>
         </div>
         <script src="{% static "masters/js/jquery_3.4.1_min.js" %}"></script>
@@ -171,6 +283,59 @@ unless explicitly stated otherwise or where it is prohibited by law -->
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            $("#quick-add").submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url:'/edit/do_edit/',
+                    type:'post',
+                    headers: {
+                        "X-CSRFToken": getCookie('csrftoken')
+                    },
+                    data: {
+                        'type':"new",
+                        'request': "word_full",
+                        'db-id': $("#db-id").val(),
+                        'term': $(".word-name").val(),
+                        'definition': $(".word-def").val(),
+                    },
+                    success: function() {
+                        $("#overlay").slideUp(100);
+                    }
+                });
+            }); 
+
+            $(".qadd").click(function () {
+                $("#overlay").fadeIn(100);
+            })
+
+            $("#remove-overlay").click(function () {
+                $("#overlay").fadeOut(100);
+            })
+
+            $("#overlay").click(function(event) { 
+                $target = $(event.target);
+                if(!$target.closest('#overlay-card').length && 
+                $('#overlay').is(":visible")) {
+                    $('#overlay').fadeOut(100);
+                }        
+            });
         </script>
     </body>
 </html>

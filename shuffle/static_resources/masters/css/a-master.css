@@ -16,22 +16,53 @@ body {
     height: 100%;
 }
 
+#overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    /* display: none; */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#content-wrapper {
+    height: 100%
+}
+
+.clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+input {
+    caret-color: rgb(211, 97, 21);
+}
 
 sidenav {
-    display: block;
     position: fixed;
     top: 0;
     left: 0;
     /* background-color:#e68f2c; */
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     box-shadow: 5px 2px 2px -5px #804808;
     background-color: #ffffff;
     transform: translateY(70px);
     width: 25vw;
+    z-index: 0;
+    height: 100%;
 }
 
 topnav {
-    z-index: 2;
+    z-index: 1;
     background-color: rgb(255, 123, 0);
     /* margin-left: 25vw; */
     position: fixed;
@@ -39,6 +70,7 @@ topnav {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    top: 0px;
     width: 100%;
 }
 
@@ -177,9 +209,102 @@ topnav {
     color: rgb(255, 217, 182);
 }
 
+.word-name {
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-color: rgb(225, 225, 225);
+    transition: border-color 0.20s;
+    outline: none;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-overflow: ellipsis;
+    width:80%;
+}
+
+.word-def {
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-color: rgb(225, 225, 225);
+    transition: border-color 0.20s;
+    outline: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-overflow: ellipsis;
+}
+
+.word-name:hover {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-name:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-def:hover {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+.word-def:focus {
+    border-color: rgb(211, 97, 21);
+    outline: none;
+}
+
+
+#form-submit {
+    border:none; 
+    border-radius: 4px; 
+    background-image: none;
+    background-color:#e0751c;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.5s;
+}
+
+#form-submit:hover {
+    background-color: rgb(194, 104, 2);
+}
+
+input:invalid:focus {
+    box-shadow:0 0 3px red;
+}
+
+.qadd {
+    color: #ffffff;
+    transition: color 0.5s, border-color 0.5s;
+    border-color: #fad3b1;
+    cursor: pointer;
+}
+
+
+.qadd:hover {
+    color: #d8d8d8;
+    border-color: #d8d8d8;
+}
+
 
 /* Large desktop */
 @media (min-width: 1200px) { 
+    #story-wrapper {
+        max-width: 76vw;
+        transform: translateX(12vw) translateY(65px);
+    }
+
+    #main-wrapper {
+        margin-left: 25vw;
+        margin-top: 85px;
+    }
+
     topnav {
         width: 100%;
         height: 65px;
@@ -285,10 +410,30 @@ topnav {
     .navbar {
         display: none;
     }
+
+    #qa-wrapper-mobile {
+        display: none;
+    }
+    #qadd-desktop {
+        font-size: 17px;
+    }
+    #overlay-card {
+        width: auto;
+    }
 }
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 769px) and (max-width: 1199px) { 
+    #story-wrapper {
+        max-width: 75vw;
+        transform: translateX(12vw) translateY(65px);
+    }
+
+    #main-wrapper {
+        margin-left: 25vw;
+        margin-top: 85px;
+    }
+
     topnav {
         width: 100%;
         height: 65px;
@@ -394,10 +539,30 @@ topnav {
     .navbar {
         display: none;
     }
+
+    #qa-wrapper-mobile {
+        display: none;
+    }
+    #qadd-desktop {
+        font-size: 15px;
+    }
+    #overlay-card {
+        width: auto;
+    }
 }
  
 /* Landscape phone to portrait tablet */
 @media (min-width: 480px) and (max-width: 768px) { 
+    #story-wrapper {
+        max-width: 76vw;
+        transform: 0;
+    }
+
+    #main-wrapper {
+        margin-left: 25vw;
+        margin-top:8vw;
+    }
+
     topnav {
         width: 100%;
         height: 7vw;
@@ -502,10 +667,30 @@ topnav {
     .navbar {
         display: none;
     }
+
+    #qa-wrapper-mobile {
+        display: none;
+    }
+    #qadd-desktop {
+        font-size: 1.75vw;
+    }
+    #overlay-card {
+        width: auto;
+    }
 }
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
+    #story-wrapper {
+        width: 95vw;
+        transform: translateX(-150px);
+    }
+
+    #main-wrapper {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    
     sidenav {
         display:none;
     }
@@ -546,5 +731,10 @@ topnav {
     .mobile-search-box:hover {
         background-color: rgba(221, 107, 0, 0.466);
     }
-
+    #qa-wrapper-mobile {
+        display: block;
+    }
+    #overlay-card {
+        width: 90%;
+    }
 }

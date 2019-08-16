@@ -1,0 +1,119 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+#story-wrapper {
+    word-wrap: break-word;
+    position: relative;
+}
+
+.database {
+    width: 98%;
+    margin-top: 10px;
+    transition: border-color 0.25s;
+}
+
+.database:hover {
+    border-color: #f88b42;
+}
+
+.db-image {
+    height: 75px;
+    margin: 20px 0 20px 20px;
+}
+
+#cards {
+    padding-right:25px;
+}
+
+.card-body {
+    width: 100%;
+}
+
+.card-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.btn:not(.btn-primary):not(.qadd) {
+    color: #fd8700;
+    transition: color border-color 0.25s;
+    border-color: #fd8700;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.btn:not(.btn-primary):hover:not(.qadd) {
+    color: #a05500;
+    border-color: #a05500;
+}
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    .top-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 17px;
+        color: #c46424;
+        padding-top: 0;
+    }
+    .date-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 15px;
+        color: #8f3900d5;
+        padding-top: 20px;
+    }
+}
+
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+    .top-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 15px;
+        color: #c46424;
+        padding-top: 0;
+    }
+    .date-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 13px;
+        color: #8f3900d5;
+        padding-top: 20px;
+    }
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+    .top-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 15px;
+        color: #c46424;
+        padding-top: 10px;
+    }
+    .date-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 13px;
+        color: #8f3900d5;
+        padding-top: 15px;
+    }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+    .top-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 15px;
+        color: #c46424;
+        padding-top: 20px;
+    }
+    .date-heading {
+        font-family: 'Open Sans' sans-serif;
+        font-size: 13px;
+        color: #8f3900d5;
+        padding-top: 15px;
+    }
+}

@@ -12,8 +12,23 @@ html, body {
 
 #center-box {
     background-color: white ;
-    transform: translateX(-8vw) translateY(3vw);
     border-radius: 10px;
+    margin: 0 auto;
+}
+
+#content-wrapper {
+    overflow: hidden;
+}
+
+#main-wrapper{
+    margin-left: 0;
+}
+
+#center-parent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 #login-header {
@@ -109,13 +124,6 @@ html, body {
         width: 30vw;
         box-shadow: -2px -2px #92929244;
     }
-
-    #story-wrapper {
-        height: 90vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
  
 /* Portrait tablet to landscape and desktop */
@@ -141,13 +149,6 @@ html, body {
         width: 40vw;
         box-shadow: -2px -2px #92929244;
     }
-
-    #story-wrapper {
-        height: 90vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
  
 /* Landscape phone to portrait tablet */
@@ -164,31 +165,30 @@ html, body {
     }
 
     #login-header {
-        font-size: 30px;
+        font-size: 40px;
     }
 
     #center-box {
-        height: 375px;
+        margin-top: 25px;
+        height: 320px;
         width: 50vw;
         box-shadow: -2px -2px #92929244;
-    }
-
-    #story-wrapper {
-        height: 90vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 }
  
 /* Landscape phones and down */
 @media (max-width: 480px) {
+    body {
+        overflow: hidden;
+    }
+
+
     .form-box {
         padding-left: 15px;
         font-size: 15px;
         height: 30px;
-        width: 200px;
-        transform: translateX(-25px)
+        width: 60vw;
+        margin: 0 auto;
     }
 
     #form-submit {
@@ -204,16 +204,6 @@ html, body {
         width: 80vw;
         background-color: transparent;
         box-shadow: 0px 0px #92929244;
-        transform: translateX(-65px) translateY(-100px);
-    }
-
-    #story-wrapper {
-        height: 90vh;
-        width: 50vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
     }
 }
 
