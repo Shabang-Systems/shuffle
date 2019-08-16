@@ -43,5 +43,6 @@ urlpatterns = [
     path('edit/', include('edit.urls')),
     path('learn/', include('learn.urls')),
     path('nyd/', include('testing_helper.urls')),
+    path('search/', include('testing_helper.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

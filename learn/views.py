@@ -27,7 +27,6 @@ def acquireSet(request, db_pk, **kwargs):
     next_shuffle = datetime.today().date()+timedelta(7)
     if len(wprogresses) > 0:
         for progress in wprogresses:
-            print(wordSet)
             if progress.isActive:
                 if progress.shuffleCount > 0:
                     shuffle_date = progress.lastShuffle.date()+timedelta(progress.shuffleCount*7)
@@ -37,13 +36,15 @@ def acquireSet(request, db_pk, **kwargs):
                     if not kwargs.get("test_request"):
                         return {"status": "error", "response": "shuffle_required", "instruction": "redirect to /learn/t page to shuffle"}
                     else:
-                        wordSet.append(progress.word)
+                        if progress.word.definition.strip() is not "":
+                            wordSet.append(progress.word)
                 else:
                     if kwargs.get("test_request"):
                         if shuffle_date-timedelta(2) > (datetime.today()).date():
                             continue
                     if shuffle_date <= (datetime.today()).date()+timedelta(7):
-                        wordSet.append(progress.word)
+                        if progress.word.definition.strip() is not "":
+                            wordSet.append(progress.word)
                         if next_shuffle > shuffle_date:
                             next_shuffle = shuffle_date
 
@@ -64,7 +65,9 @@ def acquireSet(request, db_pk, **kwargs):
                 try:
                     wp.word = words[counter]
                     wp.save()   
-                    wordSet.append(words[counter])
+                    if words[counter].definition.strip() is not "":
+                        if not kwargs.get("test_request"):
+                            wordSet.append(words[counter])
                     if next_shuffle > wp.lastShuffle.date()+timedelta(7):
                         next_shuffle = wp.lastShuffle.date()+timedelta(7)
                 except IndexError:
@@ -134,17 +137,19 @@ def level_up_do(request):
         term_id = data["word-id"]
         answer_supplied = data["answer"]
         current_word = Word.objects.get(pk=term_id)
-        if current_word.definition == answer_supplied:
+        if current_word.definition.lower().strip() == answer_supplied.lower().strip():
             index = words.index(current_word)
             prog = WordProgress.objects.all().filter(user=request.user).filter(word=current_word)[0]
             sc = prog.shuffleCount
             prog.shuffleCount = sc+1
             prog.lastShuffle = datetime.today().date() + timedelta(7*sc)
             lvSpec = LevelDesc.objects.all().filter(user=request.user).filter(db_id=data["dbid"])[0]
-            lvSpec.points = lvSpec.points+100
-            request.user.points = request.user.points+100
+            pts_award = (9999/len(current_word.database.words.all()))/4
+            print("Awarded", pts_award, "points.")
+            lvSpec.points = lvSpec.points+pts_award
+            request.user.points = request.user.points+pts_award
             request.user.save()
-            if sc+1 > 5:
+            if sc+1 == 4:
                 lvSpec.mastered = lvSpec.mastered+1
                 prog.isActive = False
             elif sc+1 == 1:
@@ -167,7 +172,9 @@ def level_up_do(request):
             prog.shuffleCount = 0
             prog.lastShuffle = datetime.today().date()
             lvSpec = LevelDesc.objects.all().filter(user=request.user).filter(db_id=data["dbid"])[0]
-            lvSpec.points = lvSpec.points-10
+            pts_dec = (9999/len(current_word.database.words.all()))/4
+            print("Penalized", pts_dec, "points.")
+            lvSpec.points = lvSpec.points-pts_dec
             prog.save()
             lvSpec.save()
             if index == len(words)-1:
@@ -194,4 +201,4 @@ def level_up_view(request, database_id):
     return HttpResponse(loader.get_template('learn/levelup.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "firstterm": words[0].term, "firstid": words[0].id, "dbid":database_id, "testsize": len(words)}, request))
 
 def cards_view(request, database_id):
-        return HttpResponse("BOO!")
+        return HttpResponse("So... Here's the deal. This _WAS_ a prerelease feature, but.... Well.... We screwed up. BEFORE ALPHA TESTING! THIS WILL BE IMPLIMENTED THEN. OK? You happy?")

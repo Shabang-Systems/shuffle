@@ -27,7 +27,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     <a href="/" style="padding-right: 3vw">
                         <img id="topnav-img" src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding">
                     </a>
-                    <form class="search" action="/search/" method="post" style="display: inline-block">
+                    <form class="search" action="/search/" method="get" style="display: inline-block">
                         <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
                         <input style="display:inline-block;" class="search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
                         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
@@ -46,20 +46,20 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <div id="account-dropdown" style="display:none">
                             <div class="acct-dropdown-item">
                                 <div style="display:inline-block; font-weight: 700; font-size: 20px; ">@{{username}}</div>
-                                {% if points <= 1000 %}
+                                {% if points <= 10000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
-                                {% elif points <= 5000 %}
+                                {% elif points <= 20000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
-                                {% elif points <= 10000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Master</t>
                                 {% elif points <= 50000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Advanced</t>
                                 {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 200000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
-                                {% elif points <= 1000000 %}
+                                {% elif points <= 500000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
-                                {% elif points <= 10000000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; G_d</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; GrandMaster</t>
                                 {% endif %}
                             </div>
                             <hr style="padding:0; margin:0; transform: translateY(-5px);"/>
@@ -106,7 +106,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     
                     <a href="/" class="navbar-brand"><img class="navbar-brand" style="width: 130px; padding-left: 10px;"; src="{% static "masters/img/shuffle-brand.png" %}" alt="shuffle branding"></a>
                     <div class="collapse navbar-collapse" id="navbarText">
-                        <form class="mobile-search" action="/search/" method="post" style="display: inline-block">
+                        <form class="mobile-search" action="/search/" method="get" style="display: inline-block">
                             <!-- <div style="transform: translateX(19px); display:inline-block; font-size: 20px; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg); -o-transform: rotate(45deg);transform: rotate(45deg);">&#9906;</div> -->
                             <input style="display:inline-block;" class="mobile-search-box" type="text" name="search-field" autocomplete="off" placeholder="&#8981;    Quickly Discover.">
                             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
@@ -134,20 +134,20 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                             <div class="acct-dropdown-item">
                                 <div style="display:inline-block; font-weight: 700; font-size: 20px; color:white;">@{{username}}</div>
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px; color:white;">
-                                {% if points <= 1000 %}
+                                {% if points <= 10000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Junior</t>
-                                {% elif points <= 5000 %}
+                                {% elif points <= 20000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Intermediate</t>
-                                {% elif points <= 10000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Master</t>
                                 {% elif points <= 50000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Advanced</t>
                                 {% elif points <= 100000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Enlightened</t>
+                                {% elif points <= 200000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Ultra</t>
-                                {% elif points <= 1000000 %}
+                                {% elif points <= 500000 %}
                                 <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; Glowing</t>
-                                {% elif points <= 10000000 %}
-                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; G_d</t>
+                                {% elif points <= 1000000 %}
+                                <t style="display:inline-block; font-weight: 200; font-size: 20px">&#8226; GrandMaster</t>
                                 {% endif %}
                                 </t>
                             </div>
@@ -168,7 +168,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
                             <h1 id="define-text" class="card-title" style="color: #d47100; font-weight: 700" style="display: block" >What are you up to? <t id="question" style="color: black; font-weight: 300;">Testing disallowed.</t></h1>
                         </div>
-                        <t class="card-text" style="font-weight: 600; padding: 0 10px 10px 10px" >Please learn the words assigned to you for a few more days before you test! Redirecting...</t>
+                        <t class="card-text" style="font-weight: 600; padding: 0 10px 10px 10px" >There are no words due for testing yet. Redirecting...</t>
                     </div>
                 </div>
                 <br />
