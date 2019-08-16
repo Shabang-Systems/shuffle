@@ -22,6 +22,26 @@ unless explicitly stated otherwise or where it is prohibited by law -->
         <!--link rel="shortcut icon" type="image/png" href="resources/slug.png"/-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head> 
+    <div id="overlay" style="display:none">
+        <div id="overlay-card" class="card" style="box-shadow: 1px 1px 3px black">
+            <div class="card-header">
+                Batch Import
+                <t id="remove-overlay" style="float:right; cursor: pointer">&#x2715;</t>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Let's add many words.</h5>
+                <p class="card-text">
+                    Please copy all the words you would like to submit. <br \>
+                    Seperate terms and definitions by a tab, and new words by a newlines.
+                </p>
+                <small class="text-muted" style="word-wrap: break-word;">Your browser may ask for clipboard permissions. This is necessary because we need to get the copied words from the clipboard.</small>
+                <br />
+                <p class="card-text">When you are ready, hit Submit.</p>
+                <p id="no-fun" class="card-text" style="color: red; display: none;">We cannot get your clipboard to import. Please grant permissions in order to continue.</p>
+                <input id="form-submit" class="batch" type="submit" value="Submit."/>
+            </div>
+        </div>
+    </div>
     <body>
         <div id="content-wrapper">
             <div id="nav-wrapper">
@@ -168,6 +188,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                             <input id="title-text" class="db-title top-text" style="display:inline-block;" type="text" name="search-field" autocomplete="off" value="{{dbname}}">
                             <t class="saved" style="display: inline-block; float: right; font-size: 13px; color: green; display:none">&#10003; saved!</t>
                             <input id="desc-text" class="top-text" type="text" style="display:block; width: 100%" name="search-field" autocomplete="off" placeholder="add a description?" value="{{dbdesc}}">
+                            <t class="btn qadd" style="display: inline-block; width: auto">Batch Import</t
                         </div> 
                     </div>
                     <div class="card" style="margin-top: 10px; width: 98%; ">
@@ -182,6 +203,14 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                             <div class="vocab-container">
                                 <hr style="margin: 0; padding:0; border-color: rgb(210, 210, 210);"/>
                                 <div id="words">
+                                    <div class="card vocab-card template" style="border-style: none; display:none">
+                                        <div class="card-body">
+                                            <t id="del-template" class="del-button">&#x2715;</t> <br />
+                                            <input id="word-name-template" class="word-name" style="display:inline-block;" type="text" name="search-field" autocomplete="off" value="">
+                                            <input id="word-def-template" class="word-def" type="text" style="display:block; width: 100%;" name="search-field" autocomplete="off" value="">
+                                        </div>
+                                    </div>
+                                    <hr id="bottom-divider-template" class="bottom-divider" style="margin: 0; padding:0; border-color: rgb(210, 210, 210);"/>
                                     {% for word in words %}
                                     <div class="card vocab-card" style="border-style: none;">
                                         <div class="card-body">
@@ -211,6 +240,107 @@ unless explicitly stated otherwise or where it is prohibited by law -->
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
+
+            $(".batch").click(function (e) {
+                var call_delay = 0;
+                navigator.clipboard.readText()
+                    .then(text => {
+                        terms = text.match(/[^\r\n]+/g);
+                        terms.forEach(function(item, index) {
+                            var split = item.split('\t');
+                            var term = split[0];
+                            var def = split[1];
+                            if (term == undefined) {
+                                term = ""
+                            } 
+                            if (def == undefined) {
+                                def = ""
+                            }
+                            call_delay = call_delay+75;
+                            $.ajax({
+                                url:'/edit/do_edit/',
+                                type:'post',
+                                headers: {
+                                    "X-CSRFToken": getCookie('csrftoken')
+                                },
+                                data: {
+                                    'type':"new",
+                                    'request': "word_full",
+                                    'db-id': {{ dbid }},
+                                    'term': term,
+                                    'definition': def
+                                },
+                                complete: function(d) {
+                                    var word_id = d['responseJSON']['id'];
+                                    var cln = $(".vocab-card")[0].cloneNode(true);
+                                    $(cln).css("display", "block");
+                                    cln.getElementsByClassName("del-button")[0].id = "del-"+d['responseJSON']['id'];
+                                    cln.getElementsByClassName("word-name")[0].id = "word-name-"+d['responseJSON']['id'];
+                                    cln.getElementsByClassName("word-name")[0].value = term;
+                                    cln.getElementsByClassName("word-def")[0].id = "word-def-"+d['responseJSON']['id'];
+                                    cln.getElementsByClassName("word-def")[0].value = def;
+                                    var cln_ln = $(".bottom-divider").slice(-1)[0].cloneNode(true);
+                                    $("#words").get()[0].appendChild(cln);
+                                    $("#words").get()[0].appendChild(cln_ln);
+                                    build("word-name-"+d['responseJSON']['id']);
+                                    build("word-def-"+d['responseJSON']['id']);
+                                    $("#word-def-"+d['responseJSON']['id']).keypress(function (e) {
+                                        var key = e.which;
+                                        if(key == 13)  // the enter key code
+                                        {
+                                            newTerm();
+                                        }
+                                    });
+                                    $("#"+"del-"+d['responseJSON']['id']).click(function () {
+                                        $.ajax({
+                                            url:'/edit/do_edit/',
+                                            type:'post',
+                                            headers: {
+                                                "X-CSRFToken": getCookie('csrftoken')
+                                            },
+                                            data: {
+                                                'type':"del",
+                                                'db-id': {{ dbid }},
+                                                'content': d['responseJSON']['id'],
+                                            },
+                                            complete: function() {
+                                                $("#"+"del-"+d['responseJSON']['id']).parents(".vocab-card").hide(750);
+                                                $(cln_ln).fadeOut(750);
+                                            }
+                                        });   
+                                    });
+                                }
+                            });
+                        });
+                        $(".batch").val("Loading... Do not close this window.");
+                        setTimeout(function() {
+                            $(".batch").val("Submit.");
+                            $("#overlay").slideUp(100);
+                            window.location.reload();
+                        }, call_delay);
+                    })
+                    .catch(err => {
+                        $("#no-fun").show(200);
+                        console.error('Failed to read clipboard contents: ', err);
+                    });
+            })
+
+            $(".qadd").click(function (e) {
+                e.preventDefault();
+                $("#overlay").fadeIn(100);
+            })
+
+            $("#remove-overlay").click(function () {
+                $("#overlay").fadeOut(100);
+            })
+
+            $("#overlay").click(function(event) { 
+                $target = $(event.target);
+                if(!$target.closest('#overlay-card').length && 
+                $('#overlay').is(":visible")) {
+                    $('#overlay').fadeOut(100);
+                }        
+            });
 
             function getCookie(name) {
                 var cookieValue = null;
@@ -286,9 +416,22 @@ unless explicitly stated otherwise or where it is prohibited by law -->
 
             build("title-text");
             build("desc-text");
+
+            $("#title-text").focus(function() {
+                console.log('boo');
+                $(this).select();
+            });
+
             {% for word in words %}
                 build("word-name-{{ word.1 }}");
                 build("word-def-{{ word.1 }}");
+                $("#word-def-{{ word.1 }}").keypress(function (e) {
+                    var key = e.which;
+                    if(key == 13)  // the enter key code
+                    {
+                        newTerm();
+                    }
+                });
                 $("#del-{{ word.1 }}").click(function () {
                     $.ajax({
                         url:'/edit/do_edit/',
@@ -308,10 +451,8 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     });   
                 });
             {% endfor %}
-            $(".done").click(function () {
-                window.location.href = '/databases/'+{{ dbid }};
-            })
-            $(".new-term").click(function () {
+
+            function newTerm() {
                 $.ajax({
                     url:'/edit/do_edit/',
                     type:'post',
@@ -326,6 +467,7 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     complete: function(d) {
                         var word_id = d['responseJSON']['id'];
                         var cln = $(".vocab-card")[0].cloneNode(true);
+                        $(cln).css("display", "block");
                         cln.getElementsByClassName("del-button")[0].id = "del-"+d['responseJSON']['id']
                         cln.getElementsByClassName("word-name")[0].id = "word-name-"+d['responseJSON']['id']
                         cln.getElementsByClassName("word-name")[0].value = ""
@@ -336,6 +478,13 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         $("#words").get()[0].appendChild(cln_ln);
                         build("word-name-"+d['responseJSON']['id']);
                         build("word-def-"+d['responseJSON']['id']);
+                        $("#word-def-"+d['responseJSON']['id']).keypress(function (e) {
+                            var key = e.which;
+                            if(key == 13)  // the enter key code
+                            {
+                                newTerm();
+                            }
+                        });
                         $("#"+"del-"+d['responseJSON']['id']).click(function () {
                             $.ajax({
                                 url:'/edit/do_edit/',
@@ -372,7 +521,12 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                         // $("#words").get()[0].appendChild(cln_ln[0]);
                     }
                 });
-            });
+            }
+
+            $(".done").click(function () {
+                window.location.href = '/databases/'+{{ dbid }};
+            })
+            $(".new-term").click(newTerm);
 
             // var cln = $($(".vocab-card")[0].cloneNode(true));
             // cln.children(".del-button").id

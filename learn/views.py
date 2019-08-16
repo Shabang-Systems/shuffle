@@ -142,6 +142,8 @@ def level_up_do(request):
             prog.lastShuffle = datetime.today().date() + timedelta(7*sc)
             lvSpec = LevelDesc.objects.all().filter(user=request.user).filter(db_id=data["dbid"])[0]
             lvSpec.points = lvSpec.points+100
+            request.user.points = request.user.points+100
+            request.user.save()
             if sc+1 > 5:
                 lvSpec.mastered = lvSpec.mastered+1
                 prog.isActive = False

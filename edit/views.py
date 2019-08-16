@@ -32,7 +32,6 @@ def edit_view(request, database_id):
         database = Database(name="Untitled Database", description="", owner=request.user)
         database.save()
         LevelDesc(db=database, user=request.user, points=0, mastered=0).save()
-        Word(database=database).save()
         database_id = database.id
         return redirect("/edit/"+str(database_id))
     else:
