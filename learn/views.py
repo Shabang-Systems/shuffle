@@ -200,5 +200,20 @@ def level_up_view(request, database_id):
         return HttpResponse(loader.get_template('learn/levelup_no.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "dbid":database_id}, request))
     return HttpResponse(loader.get_template('learn/levelup.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "firstterm": words[0].term, "firstid": words[0].id, "dbid":database_id, "testsize": len(words)}, request))
 
+@csrf_protect
+@login_required(login_url='/login')
 def cards_view(request, database_id):
-        return HttpResponse("So... Here's the deal. This _WAS_ a prerelease feature, but.... Well.... We screwed up. BEFORE ALPHA TESTING! THIS WILL BE IMPLIMENTED THEN. OK? You happy?")
+    words = acquireSet(request, database_id, test_request=True, init=request.user.setCount)["response"]
+    folders = request.user.folders.all()
+    folderContext = []
+    for folder in folders:
+        folderContext.append([folder.id, folder.name])
+    databases = request.user.user_levels.all().order_by("-lastAccess")
+    owned = []
+    for database in databases:
+        if database.db.owner == request.user:
+            owned.append([database.db.name, database.db.description, database.db.owner.username, database.points, database.db.id])
+    wds = []
+    for word in words:
+        wds.append([word.term, word.definition])
+    return HttpResponse(loader.get_template('learn/cards.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "words":wds}, request))
