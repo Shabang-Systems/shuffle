@@ -1,0 +1,93 @@
+/* Bada Bing, Bada Boom
+The thoughts, ideas, and opinions both spoken and internalized
+are the forces, that traverse all platforms, all standards
+and all norms to form their unique class, unique style, and a
+unique kind of ideology that future generations will look up to.
+We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
+unless explicitly stated otherwise or where it is prohibited by law */
+
+.btn-primary {
+    background-color: orange;
+    border-color: #d47100 !important;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+
+.btn-primary:hover {
+    background-color: #d6862a;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: #b16816 !important;
+}
+
+.btn:active {
+    background-color: #b16816 !important;
+}
+
+.v-card {
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    animation-iteration-count: 1;
+    animation: flip 1s;
+}
+
+.btn:not(.btn-primary) {
+    color: #fd8700;
+    transition: color border-color 0.25s;
+    border-color: #fd8700;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.btn:not(.btn-primary):hover {
+    color: #a05500;
+    border-color: #a05500;
+}
+
+.front, .back {
+	backface-visibility: hidden;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 3;
+	/* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.unflip {
+    transform: rotateY(0deg);
+}
+
+/* Large desktop */
+@media (min-width: 1199px) { 
+    
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 767px) and (max-width: 1199px) { 
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 480px) and (max-width: 767px) { 
+    
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+}
