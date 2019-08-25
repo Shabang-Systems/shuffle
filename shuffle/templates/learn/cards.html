@@ -159,27 +159,19 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     </div>
                 </nav>
             </div>
-            <div id="main-wrapper" style="padding-right: 50px; padding-left: 30px; padding-top: 10px;">
-                <div style="transform: translateX(20px);">
-                    <div id="flips" class="unflip">
-                        <div class="card front" style="width: 100%; height: 75vh; ">
-                            <div class="card-body" style="display: flex; justify-content: center; align-items: center; ">
-                                <h1 style="font-weight: 700;">Term</h1>
-                            </div>
-                            <div style="margin-bottom: 30px;">
-                                <div style="width: 100%; display: flex; justify-content: center; align-items: center; z-index:0">
-                                    <a href="#" class="btn btn-primary" style="margin-left: 10px">&#9666;</a>
-                                    <a href="#" class="btn btn-primary" style="margin-left: 10px" onclick="flip()">Flip</a>
-                                    <a href="#" class="btn btn-primary" style="margin-left: 10px">&#9656;</a>
-                                </div>
-                            </div>
+            <div id="main-wrapper" style="padding-right: 40px; padding-top: 10px;">
+                <div style="transform: translateX(20px); text-align: center;">
+                    <div class="card flipper">
+                        <div class="card-body face front">
+                            <h1>TERM!!!</h1>
                         </div>
-                        <div class="card back" style="width: 100%; height: 70vh; ">
-                            <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-                                <h1 style="font-weight: 700;">Definition</h1>
-                            </div>
+                        <div class="card-body face back">
+                            <h1>DEFINITION!!!</h1>
                         </div>
                     </div>
+                    <a href="#" class="btn btn-primary ctrl-buttons" style="margin-left: 10px; display: inline-block">&#9666;</a>
+                    <a href="#" class="btn btn-primary ctrl-buttons" style="margin-left: 10px; display: inline-block" onclick="flip()">Flip</a>
+                    <a href="#" class="btn btn-primary ctrl-buttons" style="margin-left: 10px; display: inline-block">&#9656;</a>
                 </div>
                 <br />
             </div>
@@ -192,18 +184,12 @@ unless explicitly stated otherwise or where it is prohibited by law -->
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
 
-
-            var flipped = true;
-
             function flip() {
-                var card = document.getElementById("flips");
-                if (flipped == true){
-                    card.setAttribute("class", "unflip")
-                }
-                else {
-                    card.setAttribute("class", "flip")
-                }
+                $(".flipper").toggleClass('flipped');
             }
+
+            $(".flipper").click(flip);
+
         </script>
     </body>
 </html>
