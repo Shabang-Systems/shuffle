@@ -34,7 +34,8 @@ def acquireSet(request, db_pk, **kwargs):
                     shuffle_date = progress.lastShuffle.date()+timedelta(7)
                 if shuffle_date < (datetime.today()).date():
                     if not kwargs.get("test_request"):
-                        return {"status": "error", "response": "shuffle_required", "instruction": "redirect to /learn/t page to shuffle"}
+                        if progress.word.definition.strip() is not "":
+                            return {"status": "error", "response": "shuffle_required", "instruction": "redirect to /learn/t page to shuffle"}
                     else:
                         if progress.word.definition.strip() is not "":
                             wordSet.append(progress.word)
@@ -45,8 +46,8 @@ def acquireSet(request, db_pk, **kwargs):
                     if shuffle_date <= (datetime.today()).date()+timedelta(7):
                         if progress.word.definition.strip() is not "":
                             wordSet.append(progress.word)
-                        if next_shuffle > shuffle_date:
-                            next_shuffle = shuffle_date
+                            if next_shuffle > shuffle_date:
+                                next_shuffle = shuffle_date
 
     else:
         if "init" in kwargs:
@@ -86,6 +87,37 @@ def acquireSet(request, db_pk, **kwargs):
     
     return {"status": "success", "response": wordSet, "body": {"due": next_shuffle}}
 
+def calc_due(due_date):
+    if due_date.month == datetime.today().month:
+        days = due_date.day-datetime.today().day
+    else:
+        month = datetime.today().month
+        day = datetime.today().day
+        if month == 1:
+            days = 31-day+due_date.day
+        elif month == 2:
+            days = 30-day+due_date.day
+        elif month == 3:
+            days = 31-day+due_date.day
+        elif month == 4:
+            days = 30-day+due_date.day
+        elif month == 5:
+            days = 31-day+due_date.day
+        elif month == 6:
+            days = 30-day+due_date.day
+        elif month == 7:
+            days = 31-day+due_date.day
+        elif month == 8:
+            days = 31-day+due_date.day
+        elif month == 9:
+            days = 30-day+due_date.day
+        elif month == 10:
+            days = 31-day+due_date.day
+        elif month == 11:
+            days = 30-day+due_date.day
+        elif month == 12:
+            days = 31-day+due_date.day
+    return days
 
 # Create your views here.
 @csrf_protect
@@ -124,9 +156,8 @@ def learn_view(request, database_id):
             as_words.append([word.term, word.definition])
             copy_string = copy_string+word.term+"\t"+word.definition+"\n"
         due = autoset_response["body"]["due"]
-    
-    days = due.day-datetime.today().day
-    
+        days = calc_due(due)
+
     return HttpResponse(template.render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "words": as_words, "dbname": database.name, "dbdesc": database.description, "dbowner": database.owner.username, "dbid": database_id, "dbPoints": levelSpec.points, "mastered":  levelSpec.mastered, "count": len(database.words.all()), "owned": owned, "due":due, "days_to_learn":days, "cp_str":copy_string}, request))
 
 @login_required(login_url='/login')
@@ -196,6 +227,7 @@ def level_up_view(request, database_id):
     for database in databases:
         if database.db.owner == request.user:
             owned.append([database.db.name, database.db.description, database.db.owner.username, database.points, database.db.id])
+    print(words)
     if len(words) == 0:
         return HttpResponse(loader.get_template('learn/levelup_no.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "dbid":database_id}, request))
     return HttpResponse(loader.get_template('learn/levelup.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "firstterm": words[0].term, "firstid": words[0].id, "dbid":database_id, "testsize": len(words)}, request))
