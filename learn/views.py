@@ -248,4 +248,5 @@ def cards_view(request, database_id):
     wds = []
     for word in words:
         wds.append([word.term, word.definition])
-    return HttpResponse(loader.get_template('learn/cards.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "words":wds}, request))
+    wordCount = len(wds)
+    return HttpResponse(loader.get_template('learn/cards.html').render({"username": request.user.username, "firstname": request.user.first_name, "points": request.user.points, "folders": folderContext, "owned": owned, "words":wds, "wordCount": wordCount, "dbid":database_id}, request))

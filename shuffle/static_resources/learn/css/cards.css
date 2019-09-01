@@ -6,6 +6,10 @@ unique kind of ideology that future generations will look up to.
 We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law */
 
+#back {
+    cursor: pointer;
+}
+
 .btn-primary {
     background-color: orange;
     border-color: #d47100 !important;
@@ -65,8 +69,9 @@ unless explicitly stated otherwise or where it is prohibited by law */
 
 .flipper {
     transform-style: preserve-3d;
-    transition: 0.5s;
+    transition: 0.25s;
     background-color: #fff;
+    display: none;
 }
 
 .flipped {
@@ -92,6 +97,10 @@ unless explicitly stated otherwise or where it is prohibited by law */
     .flipper {
         height: 78vh;
     }
+    .btn-primary {
+        font-size: 15px;
+        width: 7%;
+    }
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -101,6 +110,10 @@ unless explicitly stated otherwise or where it is prohibited by law */
     }
     .flipper {
         height: 74vh;
+    }
+    .btn-primary {
+        font-size: 12px;
+        width: 10%;
     }
 }
  
@@ -112,6 +125,10 @@ unless explicitly stated otherwise or where it is prohibited by law */
     .flipper {
         height: 68vh;
     }
+    .btn-primary {
+        font-size: 12px;
+        width: 15%;
+    }
 }
  
 /* Landscape phones and down */
@@ -121,5 +138,10 @@ unless explicitly stated otherwise or where it is prohibited by law */
     }
     .flipper {
         height: 75vh;
+    }
+
+    .btn-primary {
+        font-size: 3vw;
+        width: 16%;
     }
 }

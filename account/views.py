@@ -11,7 +11,6 @@ unless explicitly stated otherwise or where it is prohibited by law
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from rest_framework import viewsets
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
