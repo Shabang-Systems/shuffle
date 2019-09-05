@@ -6,6 +6,10 @@ unique kind of ideology that future generations will look up to.
 We are #!/Shabang. (c) 2019/2020 Shabang Systems, LLC. All rights reserved
 unless explicitly stated otherwise or where it is prohibited by law */
 
+#back {
+    cursor: pointer;
+}
+
 .btn-primary {
     background-color: orange;
     border-color: #d47100 !important;
@@ -26,13 +30,6 @@ unless explicitly stated otherwise or where it is prohibited by law */
     background-color: #b16816 !important;
 }
 
-.v-card {
-    transition: transform 1s;
-    transform-style: preserve-3d;
-    animation-iteration-count: 1;
-    animation: flip 1s;
-}
-
 .btn:not(.btn-primary) {
     color: #fd8700;
     transition: color border-color 0.25s;
@@ -46,48 +43,105 @@ unless explicitly stated otherwise or where it is prohibited by law */
     border-color: #a05500;
 }
 
-.front, .back {
-	backface-visibility: hidden;
-	top: 0;
-	left: 0;
+.face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
-/* front pane, placed above back */
-.front {
-	z-index: 3;
-	/* for firefox 31 */
-    transform: rotateY(0deg);
-}
-
-/* back, initially hidden pane */
 .back {
-	transform: rotateY(180deg);
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    transform: rotatex(180deg);
 }
 
-.flip {
-    transform: rotateY(180deg);
+.front {
+    position: absolute;
+    z-index: 10;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
 }
 
-.unflip {
-    transform: rotateY(0deg);
+.flipper {
+    transform-style: preserve-3d;
+    transition: 0.25s;
+    background-color: #fff;
+    display: none;
 }
+
+.flipped {
+    transform: rotatex(-180deg);
+}
+
+.flipped > .front {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.flipped > .back {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 /* Large desktop */
 @media (min-width: 1199px) { 
-    
+    .ctrl-buttons {
+        width: 7%;
+    }
+    .flipper {
+        height: 78vh;
+    }
+    .btn-primary {
+        font-size: 15px;
+        width: 7%;
+    }
 }
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 767px) and (max-width: 1199px) { 
-
+    .ctrl-buttons {
+        width: 10%;
+    }
+    .flipper {
+        height: 74vh;
+    }
+    .btn-primary {
+        font-size: 12px;
+        width: 10%;
+    }
 }
  
 /* Landscape phone to portrait tablet */
 @media (min-width: 480px) and (max-width: 767px) { 
-    
+    .ctrl-buttons {
+        width: 12%;
+    }
+    .flipper {
+        height: 68vh;
+    }
+    .btn-primary {
+        font-size: 12px;
+        width: 15%;
+    }
 }
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
+    .ctrl-buttons {
+        width: 15%;
+    }
+    .flipper {
+        height: 75vh;
+    }
 
+    .btn-primary {
+        font-size: 3vw;
+        width: 16%;
+    }
 }

@@ -159,27 +159,24 @@ unless explicitly stated otherwise or where it is prohibited by law -->
                     </div>
                 </nav>
             </div>
-            <div id="main-wrapper" style="padding-right: 50px; padding-left: 30px; padding-top: 10px;">
-                <div style="transform: translateX(20px);">
-                    <div id="flips" class="unflip">
-                        <div class="card front" style="width: 100%; height: 75vh; ">
-                            <div class="card-body" style="display: flex; justify-content: center; align-items: center; ">
-                                <h1 style="font-weight: 700;">Term</h1>
-                            </div>
-                            <div style="margin-bottom: 30px;">
-                                <div style="width: 100%; display: flex; justify-content: center; align-items: center; z-index:0">
-                                    <a href="#" class="btn btn-primary" style="margin-left: 10px">&#9666;</a>
-                                    <a href="#" class="btn btn-primary" style="margin-left: 10px" onclick="flip()">Flip</a>
-                                    <a href="#" class="btn btn-primary" style="margin-left: 10px">&#9656;</a>
-                                </div>
-                            </div>
+            <div id="main-wrapper" style="padding-right: 40px; padding-top: 10px;">
+                
+                <div style="transform: translateX(20px); text-align: center;">
+                    {% for word in words %}
+                    <div class="card flipper">
+                        <div class="card-body face front">
+                            <h1>{{ word.0 }}</h1>
                         </div>
-                        <div class="card back" style="width: 100%; height: 70vh; ">
-                            <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-                                <h1 style="font-weight: 700;">Definition</h1>
-                            </div>
+                        <div class="card-body face back">
+                            {{ word.0 }}: &nbsp;
+                            <h1>{{ word.1 }}</h1>
                         </div>
                     </div>
+                    {% endfor %}
+                    <a href="#" id="back" class="btn btn-primary ctrl-buttons" style="float: left; position: relative">Back</a>
+                    <a href="#" id="left" class="btn btn-primary ctrl-buttons" style="margin-left: 10px; display: inline-block; background-color: rgb(230, 230, 230); color: #d47100">&#9666;</a>
+                    <a href="#" class="btn btn-primary ctrl-buttons" style="margin-left: 10px; display: inline-block" onclick="flip()">Flip</a>
+                    <a href="#" id="right" class="btn btn-primary ctrl-buttons" style="margin-left: 10px; display: inline-block">&#9656;</a>
                 </div>
                 <br />
             </div>
@@ -192,18 +189,66 @@ unless explicitly stated otherwise or where it is prohibited by law -->
             $("#account").mouseenter(function(){$("#account-dropdown").fadeIn(200)});
             $("#account-dropdown-container").mouseleave(function(){$("#account-dropdown").fadeOut(200)});
 
-
-            var flipped = true;
-
             function flip() {
-                var card = document.getElementById("flips");
-                if (flipped == true){
-                    card.setAttribute("class", "unflip")
-                }
-                else {
-                    card.setAttribute("class", "flip")
+                $(".flipper").toggleClass('flipped');
+            }
+
+            $(".flipper").click(flip);
+
+            var maxVar = {{ wordCount }}-1;
+            var currentIndex = 0;
+            var enabled = true;
+
+            function moveRight() {
+                if (currentIndex != maxVar && enabled){
+                    enabled = false;
+                    $($(".flipper")[currentIndex]).fadeOut(50, function(){
+                        $($(".flipper")[currentIndex+1]).fadeIn(50);
+                        currentIndex++;
+                        enabled = true;
+                    });
+                    $("#left").css({"background-color": "orange", "color": "white"});
+                    if (currentIndex+1 == maxVar) {
+                        $("#right").css({"background-color": "rgb(230, 230, 230)", "color": "#d47100"});
+                    }
                 }
             }
+
+            function moveLeft() {
+                console.log(currentIndex);
+                if (currentIndex >= 1 && enabled){
+                    enabled = false;
+                    $($(".flipper")[currentIndex]).fadeOut(50, function(){
+                        $($(".flipper")[currentIndex-1]).fadeIn(50);
+                        currentIndex--;
+                        enabled = true;
+                    });
+                    $("#right").css({"background-color": "orange", "color": "white"});
+                    if (currentIndex-1 == 0) {
+                        $("#left").css({"background-color": "rgb(230, 230, 230)", "color": "#d47100"});
+                    }
+                }
+            }
+
+            $("#back").click(function() {
+                window.location.href = "/learn/l/{{ dbid }}"
+            });
+
+            $($(".flipper")[currentIndex]).fadeIn(200);
+            
+            $("#right").click(moveRight);
+
+            $("#left").click(moveLeft);
+
+            $(document).on("keydown", function(e){
+                if (e.code == "Space"){
+                    flip();
+                } else if (e.code == "ArrowRight") {
+                    moveRight();
+                } else if (e.code == "ArrowLeft") {
+                    moveLeft();
+                }
+            });
         </script>
     </body>
 </html>
